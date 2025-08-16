@@ -16,9 +16,7 @@ export default function Experience() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const { buildingVariant } = useControls({
-    buildingVariant: { value: 1, min: 1, max: 3, step: 1, label: "Options" },
-  });
+  const { buildingOptions } = useControls({ buildingOptions: { value: 'option1', options: ['option1', 'option2', 'option3'] } });
 
   // SVG for Google Maps-style location marker
   const LocationMarker = () => (
@@ -36,12 +34,12 @@ export default function Experience() {
 
   return (
     <>
-      <color args={["#ffffff"]} attach="background" />
+      <color args={["#d3e5f8"]} attach="background" />
       <OrbitControls
         makeDefault
         autoRotateSpeed={-0.1}
         zoomSpeed={2}
-        enableZoom={true}
+        enableZoom={false}
         minDistance={6}
         maxDistance={3000000}
         // enablePan={false}
@@ -109,7 +107,7 @@ export default function Experience() {
             >
               &#10005;
             </button>
-            <h2>UF Health Shands Hospital</h2>
+            <h3>UF Health Shands Hospital</h3>
             <p>
               UF Health represents the commitment of more than 30,000 faculty
               and staff to reach higher and farther. Together we translate

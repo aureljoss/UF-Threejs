@@ -1,12 +1,134 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  max-width: 100%;
+  background: #d3e5f8;
+}
+
+* {
+  font-size: 16px;
+  font-family: "Open Sans", "Noto Sans", Arial, sans-serif;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 160px;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 68px;
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 48px;
+  font-weight: 800;
+}
+
+h4 {
+  font-size: 38px;
+}
+
+h5 {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.7em;
+}
+
+h6 {
+  font-size: 20px;
+  line-height: 1.7em;
+}
+
+p {
+  line-height: 1.4;
+}
+
+#main-nav{
+    position:absolute;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width:90vw;
+    margin: auto 5vw;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#main-nav ul{
+    display:flex;
+}
+
+#main-nav li{
+    margin: auto 10px;
+    list-style: none;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding:10px 20px;    
+}
+
+#main-nav a{
+    text-decoration: none;
+    color: inherit;
+}
+
+#explore{
+  background: #121f37 !important;
+  color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    z-index: 50;
+    position: fixed;
+    bottom: 0;
+    right: 0;}
+
+.scroll__wrapper {
+    grid-column-gap: .625rem;
+    grid-row-gap: .625rem;
+    justify-content: flex-end;
+    padding-bottom: 2.5rem;
+    padding-right: 0;
+    display: flex;
+}
+
+.scroll-button {
+    background-color: rgba(192, 190, 190, 0.8);
+    cursor: pointer;
+    border-radius: .75rem;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+}
+
+
+/* THREE JS SECTION */
+
 #root{
-    height: 100vh;
+    height: 90vh;
+    top:10vh;
     width: 100vw;
     margin:0;
     padding: 0;
     overflow: hidden;
+    position:absolute;
 }
-
-
 
 .hotspot {
     background: none;
@@ -15,4 +137,8 @@
 
 .markers:hover {
   transform: scale(1.1);
+}
+
+#leva__root > * {
+  top:10vh;
 }
