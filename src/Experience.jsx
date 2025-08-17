@@ -24,15 +24,14 @@ const models = [
 ];
 
 export default function Experience() {
-  const { modelOption } = useControls({
-    modelOption: {
+  const { Option } = useControls({
+    Option: {
       value: models[0].label,
-      // options: models.map((m) => m.label),
-      options: ['option1', 'option2', 'option3'],
+      options: models.map((m) => m.label),
     },
   });
 
-  const selectedModel = models.find((m) => m.label === modelOption);
+  const selectedModel = models.find((m) => m.label === Option);
 
   const gltf = useGLTF(selectedModel.glb);
   const texture = useTexture(selectedModel.texture);

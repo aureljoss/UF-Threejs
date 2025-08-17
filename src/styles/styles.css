@@ -12,9 +12,7 @@ html {
 }
 
 * {
-  font-size: 16px;
   font-family: "Open Sans", "Noto Sans", Arial, sans-serif;
-  z-index: 1;
 }
 
 h1 {
@@ -141,5 +139,6 @@ p {
 
 #leva__root > * {
   top:10vh;
-  min-width: 360px;
+  right: 5vw;
+  min-width: 300px;
 }

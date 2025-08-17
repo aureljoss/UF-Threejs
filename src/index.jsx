@@ -8,17 +8,19 @@ import CameraAnimation from "./CameraAnimation.jsx";
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
 root.render(
-    <Canvas
-        // flat
-        // camera={ {
-        //     fov: 35,
-        //     near: 0.1,
-        //     // far: 100,
-        //     far: 10000,
-        //     position: [ 0,40,0 ]
-        // } }
-    >
-        <Experience />
-        <CameraAnimation />
-    </Canvas>
+    <>
+        <Canvas
+            // flat
+            // camera={ {
+            //     fov: 35,
+            //     near: 0.1,
+            //     // far: 100,
+            //     far: 10000,
+            //     position: [ 0,40,0 ]
+            // } }
+        >
+            <Experience />
+            <CameraAnimation />
+        </Canvas>
+    </>
 )
