@@ -73,7 +73,7 @@ p {
     padding:10px 20px;    
 }
 
-#main-nav a{
+a{
     text-decoration: none;
     color: inherit;
 }
@@ -115,6 +115,10 @@ p {
     display: flex;
 }
 
+.scroll-button--up{
+  transform: rotate(180deg);
+}
+
 
 /* THREE JS SECTION */
 
@@ -141,4 +145,26 @@ p {
   top:10vh;
   right: 5vw;
   min-width: 300px;
+}
+
+footer nav{
+  position:absolute;
+  bottom: 2vh;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  width:60vw;
+  margin: auto 5vw;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 0px 20px;
+  border: white 1px solid;    
+}
+
+footer ul{
+  list-style: none;
+  display: flex;
+  width: 100%;
+  justify-content:space-between;
 }

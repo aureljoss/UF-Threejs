@@ -1,12 +1,19 @@
 import {
   OrbitControls,
   useGLTF,
+  useScroll,
   useTexture,
+  CameraShake,
   Center,
   Html,
+  ScrollControls,
 } from "@react-three/drei";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useControls } from "leva";
+import { DoubleSide } from "three";
+import { useFrame, useThree } from "@react-three/fiber";
+import { gsap } from "gsap";
+import { Perf } from 'r3f-perf'
 
 const models = [
   {
@@ -23,6 +30,44 @@ const models = [
   },
 ];
 
+// function CameraScrollAnimation() {
+//   const { camera } = useThree();
+//   const scroll = useScroll();
+
+//   useFrame(() => {
+//     // Get normalized scroll value (0 to 1)
+//     const scrollValue = scroll.offset;
+
+//       // gsap.to(camera.position, {
+//       //   x: 5 + scrollValue * 0.01,
+//       //   y: 3 + scrollValue * 0.005,
+//       //   z: 10 - scrollValue * 0.02,
+//       //   duration: 1,
+//       //   overwrite: "auto",
+//       // });
+//       // gsap.to(camera.rotation, {
+//       //   x: 0,
+//       //   y: Math.PI / 4 + scrollValue * 0.0005,
+//       //   z: 0,
+//       //   duration: 1,
+//       //   overwrite: "auto",
+//       // });
+
+//     // Animate camera position, rotation, and zoom based on scroll
+//     camera.position.x = -10 + scrollValue * 20; // from -10 to 10
+//     camera.position.y = 10 - scrollValue * 5; // from 10 to 5
+//     camera.position.z = 16 - scrollValue * 10; // from 16 to 6
+//     camera.rotation.y = scrollValue * Math.PI * 0.5; // rotate up to 90deg
+//     camera.zoom = 1 + scrollValue * 1.5; // zoom from 1 to 2.5
+
+//     camera.lookAt(0, 0, 0)
+
+//     camera.updateProjectionMatrix();
+//   });
+
+//   return null;
+// }
+
 export default function Experience() {
   const { Option } = useControls({
     Option: {
@@ -37,8 +82,8 @@ export default function Experience() {
   const texture = useTexture(selectedModel.texture);
   texture.flipY = false;
 
-  const {nodes}=useGLTF('./static/model/site.glb');
-  const siteTexture = useTexture('./static/model/site-baked.jpg');
+  const { nodes } = useGLTF("./static/model/site.glb");
+  const siteTexture = useTexture("./static/model/site-baked.jpg");
   siteTexture.flipY = false;
 
   const [showModal, setShowModal] = useState(false);
@@ -63,36 +108,59 @@ export default function Experience() {
         makeDefault
         autoRotateSpeed={-0.1}
         zoomSpeed={2}
-        enableZoom={false}
-        minDistance={6}
+        enableZoom={true}
+        minDistance={12}
         maxDistance={3000000}
         dampingFactor={0.05}
         minPolarAngle={Math.PI / 3}
         maxPolarAngle={Math.PI / 2}
       />
+      <CameraShake
+        maxYaw={0.001}
+        maxPitch={0.001}
+        maxRoll={0.01}
+        yawFrequency={0.8}
+        pitchFrequency={0.8}
+        rollFrequency={0.8}
+        intensity={1.0}
+        decayRate={0.8}
+      />
 
-      <Center>
-        <mesh geometry={nodes.baked.geometry} position={[0,0,0]} scale={[0.01,0.01,0.01]}>
-          <meshBasicMaterial map={siteTexture} />
-        </mesh>
-        <mesh
-          geometry={gltf.nodes[selectedModel.meshKey].geometry}
-          position={[0, 0, 0]}
-          scale={[0.01, 0.01, 0.01]}
-        >
-          <meshBasicMaterial map={texture} />
-        </mesh>
-        <Html
-          className="hotspot"
-          position={[8.5, 2.3, -1]}
-          center
-          distanceFactor={4}
-        >
-          <div className="markers" onClick={() => setShowModal(true)}>
-            <LocationMarker />
-          </div>
-        </Html>
-      </Center>
+      {/*Performance Monitoring */}
+      <Perf position="bottom-left" />
+
+      {/* <ScrollControls pages={4} damping={0.25}> */}
+        {/* <CameraScrollAnimation /> */}
+        <Center>
+          <group>
+
+            <mesh
+              geometry={nodes.baked.geometry}
+              position={[0, 0, 0]}
+              scale={[0.01, 0.01, 0.01]}
+            >
+              <meshBasicMaterial map={siteTexture} side={DoubleSide} />
+            </mesh>
+            <mesh
+              geometry={gltf.nodes[selectedModel.meshKey].geometry}
+              position={[0, 0, 0]}
+              scale={[0.01, 0.01, 0.01]}
+            >
+              <meshBasicMaterial map={texture} />
+            </mesh>
+            <Html
+              className="hotspot"
+              position={[8.5, 2.3, -1]}
+              center
+              distanceFactor={4}
+            >
+              <div className="markers" onClick={() => setShowModal(true)}>
+                <LocationMarker />
+              </div>
+            </Html>
+          </group>
+        </Center>
+      {/* </ScrollControls> */}
 
       {showModal && (
         <Html fullscreen>
