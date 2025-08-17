@@ -141,4 +141,5 @@ p {
 
 #leva__root > * {
   top:10vh;
+  min-width: 360px;
 }

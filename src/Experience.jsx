@@ -5,20 +5,45 @@ import {
   Center,
   Html,
 } from "@react-three/drei";
-import { DoubleSide } from "three";
 import { useState } from "react";
 import { useControls } from "leva";
 
+const models = [
+  {
+    label: "Option 1 Blocking",
+    glb: "./static/model/opt1-blocking.glb",
+    texture: "./static/model/opt1-blocking.jpg",
+    meshKey: "bakedOpt1B",
+  },
+  {
+    label: "Option 1 Massing",
+    glb: "./static/model/opt1-massing.glb",
+    texture: "./static/model/opt1-massing.jpg",
+    meshKey: "bakedOpt1Massing",
+  },
+];
+
 export default function Experience() {
-  const { nodes } = useGLTF("./static/model/Site.glb");
-  const bakedTexture = useTexture("./static/model/site-baked.jpg");
-  bakedTexture.flipY = false;
+  const { modelOption } = useControls({
+    modelOption: {
+      value: models[0].label,
+      // options: models.map((m) => m.label),
+      options: ['option1', 'option2', 'option3'],
+    },
+  });
+
+  const selectedModel = models.find((m) => m.label === modelOption);
+
+  const gltf = useGLTF(selectedModel.glb);
+  const texture = useTexture(selectedModel.texture);
+  texture.flipY = false;
+
+  const {nodes}=useGLTF('./static/model/site.glb');
+  const siteTexture = useTexture('./static/model/site-baked.jpg');
+  siteTexture.flipY = false;
 
   const [showModal, setShowModal] = useState(false);
 
-  const { buildingOptions } = useControls({ buildingOptions: { value: 'option1', options: ['option1', 'option2', 'option3'] } });
-
-  // SVG for Google Maps-style location marker
   const LocationMarker = () => (
     <svg width="120" height="120" viewBox="0 0 40 40">
       <circle cx="20" cy="15" r="7" fill="#e74c3c" />
@@ -42,23 +67,25 @@ export default function Experience() {
         enableZoom={false}
         minDistance={6}
         maxDistance={3000000}
-        // enablePan={false}
         dampingFactor={0.05}
         minPolarAngle={Math.PI / 3}
         maxPolarAngle={Math.PI / 2}
-        // minAzimuthAngle={(Math.PI*2)/1.15}
-        // maxAzimuthAngle={Math.PI*2}
       />
 
       <Center>
-        {/* <mesh geometry={nodes.baked.geometry} position={[-1.6, 2.65, 1.5]}> */}
         <mesh geometry={nodes.baked.geometry} position={[0,0,0]} scale={[0.01,0.01,0.01]}>
-          <meshBasicMaterial map={bakedTexture} />
+          <meshBasicMaterial map={siteTexture} />
         </mesh>
-        {/* Hotspot */}
+        <mesh
+          geometry={gltf.nodes[selectedModel.meshKey].geometry}
+          position={[0, 0, 0]}
+          scale={[0.01, 0.01, 0.01]}
+        >
+          <meshBasicMaterial map={texture} />
+        </mesh>
         <Html
           className="hotspot"
-          position={[8.5,2.3,-1]} // Change position as needed
+          position={[8.5, 2.3, -1]}
           center
           distanceFactor={4}
         >
@@ -68,7 +95,6 @@ export default function Experience() {
         </Html>
       </Center>
 
-      {/* Modal */}
       {showModal && (
         <Html fullscreen>
           <div
@@ -89,7 +115,6 @@ export default function Experience() {
               color: "rgba(0, 0, 0, 0.9)",
             }}
           >
-            {/* Close Cross */}
             <button
               onClick={() => setShowModal(false)}
               style={{
