@@ -15,20 +15,20 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { Perf } from 'r3f-perf'
 
-const models = [
-  {
-    label: "Option 1 Blocking",
-    glb: "./static/model/opt1-blocking.glb",
-    texture: "./static/model/opt1-blocking.jpg",
-    meshKey: "bakedOpt1B",
-  },
-  {
-    label: "Option 1 Massing",
-    glb: "./static/model/opt1-massing.glb",
-    texture: "./static/model/opt1-massing.jpg",
-    meshKey: "bakedOpt1Massing",
-  },
-];
+// const models = [
+//   {
+//     label: "Option 1 Blocking",
+//     glb: "./static/model/opt1-blocking.glb",
+//     texture: "./static/model/opt1-blocking.jpg",
+//     meshKey: "bakedOpt1B",
+//   },
+//   {
+//     label: "Option 1 Massing",
+//     glb: "./static/model/opt1-massing.glb",
+//     texture: "./static/model/opt1-massing.jpg",
+//     meshKey: "bakedOpt1Massing",
+//   },
+// ];
 
 // function CameraScrollAnimation() {
 //   const { camera } = useThree();
@@ -69,22 +69,33 @@ const models = [
 // }
 
 export default function Experience() {
-  const { Option } = useControls({
-    Option: {
-      value: models[0].label,
-      options: models.map((m) => m.label),
-    },
-  });
+  // const { Option } = useControls({
+  //   Option: {
+  //     value: models[0].label,
+  //     options: models.map((m) => m.label),
+  //   },
+  // });
 
-  const selectedModel = models.find((m) => m.label === Option);
+  // const selectedModel = models.find((m) => m.label === Option);
 
-  const gltf = useGLTF(selectedModel.glb);
-  const texture = useTexture(selectedModel.texture);
-  texture.flipY = false;
+  // const gltf = useGLTF(selectedModel.glb);
+  // const texture = useTexture(selectedModel.texture);
+  // texture.flipY = false;
 
+  //Site
   const { nodes } = useGLTF("./static/model/site.glb");
   const siteTexture = useTexture("./static/model/site-baked.jpg");
   siteTexture.flipY = false;
+
+  //Buildings
+  const { nodes: buildingsNodes } = useGLTF("./static/model/buildings.glb");
+  const buildingsTexture = useTexture("./static/model/buildings-baked.jpg");
+  buildingsTexture.flipY = false;
+
+  // //Trees
+  // const { nodes: treesNodes } = useGLTF("./static/model/trees.glb");
+  // const treesTexture = useTexture("./static/model/trees-baked.jpg");
+  // treesTexture.flipY = false;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -127,27 +138,37 @@ export default function Experience() {
       />
 
       {/*Performance Monitoring */}
-      <Perf position="bottom-left" />
+      {/* <Perf position="bottom-left" /> */}
 
       {/* <ScrollControls pages={4} damping={0.25}> */}
         {/* <CameraScrollAnimation /> */}
         <Center>
           <group>
-
+            {/* Site */}
             <mesh
-              geometry={nodes.baked.geometry}
+              geometry={nodes.siteBaked.geometry}
               position={[0, 0, 0]}
               scale={[0.01, 0.01, 0.01]}
             >
-              <meshBasicMaterial map={siteTexture} side={DoubleSide} />
+              <meshBasicMaterial map={siteTexture} side={DoubleSide}/>
             </mesh>
+
+            {/* Buildings */}
             <mesh
+              geometry={buildingsNodes.buildingsBaked.geometry}
+              position={[0, 0, 0]}
+              scale={[0.01, 0.01, 0.01]}
+            >
+              <meshBasicMaterial map={buildingsTexture}/>
+            </mesh>
+
+            {/* <mesh
               geometry={gltf.nodes[selectedModel.meshKey].geometry}
               position={[0, 0, 0]}
               scale={[0.01, 0.01, 0.01]}
             >
               <meshBasicMaterial map={texture} />
-            </mesh>
+            </mesh> */}
             <Html
               className="hotspot"
               position={[8.5, 2.3, -1]}

@@ -85,27 +85,25 @@ a{
 
 .container {
     width: 100%;
-    max-width: 1920px;
+    max-width: 200px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
-    z-index: 50;
+    z-index: 1;
     position: fixed;
-    bottom: 0;
+    bottom: 2vh;
     right: 0;}
 
 .scroll__wrapper {
     grid-column-gap: .625rem;
     grid-row-gap: .625rem;
     justify-content: flex-end;
-    padding-bottom: 2.5rem;
-    padding-right: 0;
     display: flex;
 }
 
 .scroll-button {
-    background-color: rgba(192, 190, 190, 0.8);
+    background-color: rgba(192, 190, 190, 0.6);  
     cursor: pointer;
     border-radius: .75rem;
     justify-content: center;
@@ -153,13 +151,14 @@ footer nav{
   display: flex;
   justify-content:space-between;
   align-items: center;
-  width:60vw;
-  margin: auto 5vw;
+  left: 50%;
+  transform:translateX(-50%);
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 30px;
-  padding: 0px 20px;
+  padding: 0px 10px;
   border: white 1px solid;    
+  line-height: 10px;
 }
 
 footer ul{
@@ -167,4 +166,9 @@ footer ul{
   display: flex;
   width: 100%;
   justify-content:space-between;
+  padding-inline-start: 0px;
+}
+
+footer li{
+  margin: auto 20px;
 }
