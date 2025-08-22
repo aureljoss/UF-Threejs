@@ -130,14 +130,28 @@ a{
     position:absolute;
 }
 
-.hotspot {
-    background: none;
-    cursor: pointer;
-}
+
 
 .markers:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
+
+.html-text__arrow{
+  width:6px;
+  height:100px;
+  background-color: black;
+  margin: 10px auto 0px;
+}
+
+.html-text{
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Safari */
+  -khtml-user-select: none;    /* Konqueror HTML */
+  -moz-user-select: none;      /* Old versions of Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
 
 #leva__root > * {
   top:10vh;

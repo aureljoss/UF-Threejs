@@ -13,22 +13,24 @@ import { useControls } from "leva";
 import { DoubleSide } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
-import { Perf } from 'r3f-perf'
+import { Perf } from "r3f-perf";
+import HtmlText from "./HtmlText";
+import LocationMarker from "./LocationMarker";
 
-// const models = [
-//   {
-//     label: "Option 1 Blocking",
-//     glb: "./static/model/opt1-blocking.glb",
-//     texture: "./static/model/opt1-blocking.jpg",
-//     meshKey: "bakedOpt1B",
-//   },
-//   {
-//     label: "Option 1 Massing",
-//     glb: "./static/model/opt1-massing.glb",
-//     texture: "./static/model/opt1-massing.jpg",
-//     meshKey: "bakedOpt1Massing",
-//   },
-// ];
+const models = [
+  {
+    label: "Option 1 Blocking",
+    glb: "./static/model/opt1-blocking.glb",
+    texture: "./static/model/opt1-blocking.jpg",
+    meshKey: "bakedOpt1Blocking",
+  },
+  // {
+  //   label: "Option 1 Massing",
+  //   glb: "./static/model/opt1-massing.glb",
+  //   texture: "./static/model/opt1-massing.jpg",
+  //   meshKey: "bakedOpt1Massing",
+  // },
+];
 
 // function CameraScrollAnimation() {
 //   const { camera } = useThree();
@@ -69,22 +71,22 @@ import { Perf } from 'r3f-perf'
 // }
 
 export default function Experience() {
-  // const { Option } = useControls({
-  //   Option: {
-  //     value: models[0].label,
-  //     options: models.map((m) => m.label),
-  //   },
-  // });
+  const { Option } = useControls({
+    Option: {
+      value: models[0].label,
+      options: models.map((m) => m.label),
+    },
+  });
 
-  // const selectedModel = models.find((m) => m.label === Option);
+  const selectedModel = models.find((m) => m.label === Option);
 
-  // const gltf = useGLTF(selectedModel.glb);
-  // const texture = useTexture(selectedModel.texture);
-  // texture.flipY = false;
+  const gltf = useGLTF(selectedModel.glb);
+  const texture = useTexture(selectedModel.texture);
+  texture.flipY = false;
 
   //Site
   const { nodes } = useGLTF("./static/model/site.glb");
-  const siteTexture = useTexture("./static/model/site-baked.jpg");
+  const siteTexture = useTexture("./static/model/site-baked-op1-blocking.jpg");
   siteTexture.flipY = false;
 
   //Buildings
@@ -93,24 +95,11 @@ export default function Experience() {
   buildingsTexture.flipY = false;
 
   // //Trees
-  // const { nodes: treesNodes } = useGLTF("./static/model/trees.glb");
-  // const treesTexture = useTexture("./static/model/trees-baked.jpg");
-  // treesTexture.flipY = false;
+  const { nodes: treesNodes } = useGLTF("./static/model/trees.glb");
+  const treesTexture = useTexture("./static/model/trees-baked.jpg");
+  treesTexture.flipY = false;
 
   const [showModal, setShowModal] = useState(false);
-
-  const LocationMarker = () => (
-    <svg width="120" height="120" viewBox="0 0 40 40">
-      <circle cx="20" cy="15" r="7" fill="#e74c3c" />
-      <path
-        d="M20 5 C27 5, 35 13, 20 35 C5 13, 13 5, 20 5 Z"
-        fill="#e74c3c"
-        stroke="#c0392b"
-        strokeWidth="2"
-      />
-      <circle cx="20" cy="15" r="3" fill="#fff" />
-    </svg>
-  );
 
   return (
     <>
@@ -120,7 +109,7 @@ export default function Experience() {
         autoRotateSpeed={-0.1}
         zoomSpeed={2}
         enableZoom={true}
-        minDistance={12}
+        minDistance={2}
         maxDistance={3000000}
         dampingFactor={0.05}
         minPolarAngle={Math.PI / 3}
@@ -141,46 +130,101 @@ export default function Experience() {
       {/* <Perf position="bottom-left" /> */}
 
       {/* <ScrollControls pages={4} damping={0.25}> */}
-        {/* <CameraScrollAnimation /> */}
-        <Center>
-          <group>
-            {/* Site */}
-            <mesh
-              geometry={nodes.siteBaked.geometry}
-              position={[0, 0, 0]}
-              scale={[0.01, 0.01, 0.01]}
-            >
-              <meshBasicMaterial map={siteTexture} side={DoubleSide}/>
-            </mesh>
+      {/* <CameraScrollAnimation /> */}
+      <Center>
+        <group>
+          {/* Site */}
+          <mesh
+            geometry={nodes.siteBaked.geometry}
+            position={[0, 0, 0]}
+            scale={[0.01, 0.01, 0.01]}
+          >
+            <meshBasicMaterial map={siteTexture} side={DoubleSide} />
+          </mesh>
 
-            {/* Buildings */}
-            <mesh
-              geometry={buildingsNodes.buildingsBaked.geometry}
-              position={[0, 0, 0]}
-              scale={[0.01, 0.01, 0.01]}
-            >
-              <meshBasicMaterial map={buildingsTexture}/>
-            </mesh>
+          {/* Buildings */}
+          <mesh
+            geometry={buildingsNodes.buildingsBaked.geometry}
+            position={[0, 0, 0]}
+            scale={[0.01, 0.01, 0.01]}
+          >
+            <meshBasicMaterial map={buildingsTexture} />
+          </mesh>
 
-            {/* <mesh
-              geometry={gltf.nodes[selectedModel.meshKey].geometry}
-              position={[0, 0, 0]}
-              scale={[0.01, 0.01, 0.01]}
-            >
-              <meshBasicMaterial map={texture} />
-            </mesh> */}
-            <Html
-              className="hotspot"
-              position={[8.5, 2.3, -1]}
-              center
-              distanceFactor={4}
-            >
-              <div className="markers" onClick={() => setShowModal(true)}>
-                <LocationMarker />
-              </div>
-            </Html>
-          </group>
-        </Center>
+          {/* Trees */}
+          <mesh
+            geometry={treesNodes.treesBaked.geometry}
+            position={[0, 0, 0]}
+            scale={[0.01, 0.01, 0.01]}
+          >
+            <meshBasicMaterial map={treesTexture} />
+          </mesh>
+
+          <mesh
+            geometry={gltf.nodes[selectedModel.meshKey].geometry}
+            position={[0, 0.002, 0]}
+            scale={[0.01, 0.01, 0.01]}
+          >
+            <meshBasicMaterial map={texture} />
+          </mesh>
+
+          <LocationMarker
+            position={[-1.6, 0.4, 3.8]}
+            distanceFactor={4}
+            onClick={() => setShowModal(true)}
+          />
+
+          {/* HTML Markers */}
+          <HtmlText
+            position={[-4, 1, 3]}
+            text="Shands Parking"
+            distanceFactor={4}
+            showArrow={true}
+          />
+          <HtmlText
+            position={[2.7, 1.6, 7.2]}
+            text="VA Hospital"
+            distanceFactor={4}
+            showArrow={true}
+          />
+          <HtmlText
+            position={[9.8, 2.6, 2.5]}
+            text="UF Health Shands Cancer Hospital"
+            distanceFactor={4}
+            showArrow={true}
+          />
+          <HtmlText
+            position={[8.4, 2.9, -1]}
+            text="UF Health Shands Hospital "
+            distanceFactor={4}
+            showArrow={true}
+          />
+          <HtmlText
+            position={[2, 2.35, 0]}
+            text="UF College of Dentistry "
+            distanceFactor={4}
+            showArrow={true}
+          />
+          <HtmlText
+            position={[-11, 0.9, 7]}
+            text="UF Health Medical Plaza "
+            distanceFactor={4}
+            showArrow={true}
+          />
+          <HtmlText
+            position={[-0.5, 1.2, -3.2]}
+            text="UF Biomedical Sciences "
+            distanceFactor={4}
+            showArrow={true}
+          />
+                    <HtmlText
+            position={[2, 1.4, -4]}
+            text="Stetson Medical Sciences "
+            distanceFactor={4}
+            showArrow={true}
+          />
+        </group>
+      </Center>
       {/* </ScrollControls> */}
 
       {showModal && (
