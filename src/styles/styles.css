@@ -117,6 +117,9 @@ a{
   transform: rotate(180deg);
 }
 
+/*MUI SECTION */
+
+
 
 /* THREE JS SECTION */
 
@@ -181,6 +184,7 @@ footer nav{
   padding: 0px 10px;
   border: white 1px solid;    
   line-height: 10px;
+  z-index: 3;
 }
 
 footer ul{
