@@ -8,7 +8,7 @@ html {
   padding: 0;
   height: 100%;
   max-width: 100%;
-  background: #d3e5f8;
+  background: #d3e5f8 !important;
 }
 
 * {
@@ -128,6 +128,7 @@ a{
     padding: 0;
     overflow: hidden;
     position:absolute;
+    z-index: 1;
 }
 
 
@@ -152,11 +153,18 @@ a{
   user-select: none;           /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
+#canvas-container {
+  position:absolute;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
 
-#leva__root > * {
-  top:10vh;
-  right: 5vw;
-  min-width: 300px;
+.simple-container {
+  position:absolute;
+  width: 30vw;
+  min-width: 480px;
+  z-index: 2;
 }
 
 footer nav{

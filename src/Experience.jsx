@@ -14,9 +14,10 @@ import { DoubleSide } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { Perf } from "r3f-perf";
-import HtmlText from "./HtmlText";
-import LocationMarker from "./LocationMarker";
+import HtmlText from "./components/HtmlText";
+import LocationMarker from "./components/LocationMarker";
 
+//Importent glb models
 const models = [
   {
     label: "Option 1 Blocking",
@@ -162,7 +163,7 @@ export default function Experience() {
 
           <mesh
             geometry={gltf.nodes[selectedModel.meshKey].geometry}
-            position={[0, 0.002, 0]}
+            position={[0, 0.004, 0]}
             scale={[0.01, 0.01, 0.01]}
           >
             <meshBasicMaterial map={texture} />

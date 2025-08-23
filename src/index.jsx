@@ -1,12 +1,17 @@
-import './styles/styles.css'
-import ReactDOM from 'react-dom/client'
-import { Canvas } from '@react-three/fiber'
-import Experience from './Experience.jsx'
-import * as THREE from 'three'
+import "./styles/styles.css";
+import ReactDOM from "react-dom/client";
+import { Canvas } from "@react-three/fiber";
+import Experience from "./Experience.jsx";
+import * as THREE from "three";
 import React, { Suspense } from "react";
 import { Html } from "@react-three/drei"; // for loading progress
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import SimpleContainer from "./components/SimpleContainer.jsx";
 
-const root = ReactDOM.createRoot(document.querySelector('#root'))
+const root = ReactDOM.createRoot(document.querySelector("#root"));
 
 function Loader() {
   return (
@@ -17,29 +22,42 @@ function Loader() {
 }
 
 root.render(
-    <>
-        <Canvas
-            // orthographic
-            flat
-            // camera={ {
-            //     fov: 55,
-            //     zoom:100,
-            //     near: 0.01,
-            //     // far: 100,
-            //     // far: 10000,
-            //     position: [ 0,0,16 ]
-            // } }
-            camera={ {
-                fov: 35,
-                near: 0.01,
-                // far: 100,
-                // far: 10000,
-                position: [ -10,10,30 ]
-            } }
-        >
-            <Suspense fallback={<Loader />}>
-                <Experience />
-            </Suspense>
-        </Canvas>
-    </>
-)
+  <>
+    <div id="canvas-container">
+      <Canvas
+        // orthographic
+        flat
+        // camera={ {
+        //     fov: 55,
+        //     zoom:100,
+        //     near: 0.01,
+        //     // far: 100,
+        //     // far: 10000,
+        //     position: [ 0,0,16 ]
+        // } }
+        camera={{
+          fov: 35,
+          near: 0.01,
+          // far: 100,
+          // far: 10000,
+          position: [-10, 10, 30],
+        }}
+      >
+        <Suspense fallback={<Loader />}>
+          <Experience />
+        </Suspense>
+      </Canvas>
+    </div>
+    <div className="simple-container" >
+      <SimpleContainer />
+    </div>
+  </>
+);
+
+// const overlay = ReactDOM.createRoot(document.querySelector("#overlay"));
+
+// overlay.render(
+//   <>
+//     <SimpleContainer className="simple-container" />
+//   </>
+// )
