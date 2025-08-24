@@ -5,6 +5,7 @@ import Experience from "./Experience.jsx";
 import * as THREE from "three";
 import React, { Suspense } from "react";
 import { Html } from "@react-three/drei"; // for loading progress
+import { EffectComposer, DepthOfField } from "@react-three/postprocessing";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -43,12 +44,20 @@ root.render(
           position: [-10, 10, 30],
         }}
       >
+        <EffectComposer>
+          <DepthOfField
+            focusDistance={0.015}
+            focalLength={0.05}
+            bokehScale={2}
+            height={480}
+          />
+        </EffectComposer>
         <Suspense fallback={<Loader />}>
           <Experience />
         </Suspense>
       </Canvas>
     </div>
-    <div className="simple-container" >
+    <div className="simple-container">
       <SimpleContainer />
     </div>
   </>

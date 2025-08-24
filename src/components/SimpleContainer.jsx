@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -6,7 +7,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
+import SelectLabels from "./SelectLabels";
+import MyImageComponent from "./ImageContainer";
 
 export default function SimpleContainer() {
   const [isShown, setIsShown] = useState(false);
@@ -55,36 +57,55 @@ export default function SimpleContainer() {
                 }}
               >
                 <Button
-                  variant="contained"
-                  onClick={() => sectionClick("introduction")}
+                  variant={
+                    visibleSection === "program blocking"
+                      ? "contained"
+                      : "outlined"
+                  }
+                  onClick={() => sectionClick("program blocking")}
                 >
-                  Introduction
+                  Program Blocking
                 </Button>
                 <Button
-                  variant="outlined"
+                  variant={
+                    visibleSection === "design" ? "contained" : "outlined"
+                  }
                   onClick={() => sectionClick("design")}
                 >
                   Design
                 </Button>
-                <Button variant="outlined" onClick={() => sectionClick("help")}>
+                <Button
+                  variant={visibleSection === "help" ? "contained" : "outlined"}
+                  onClick={() => sectionClick("help")}
+                >
                   Help
                 </Button>
               </Stack>
-              {visibleSection === "introduction" && (
-                <div id="introduction">
-                  <h5>Introduction</h5>
+              {visibleSection === "program blocking" && (
+                <div id="program blocking">
+                  <SelectLabels intent="Blocking Options" />
+                  <MyImageComponent
+                    path="./public/images/opt1-blocking.png"
+                    description="A block and stack for option 1"
+                  />
+                  <p>
+                    {" "}
+                    The Terrace is envisioned as a welcoming gateway on the west
+                    side of the existing Dental Science Complex. The concept centers on the ecology of
+                    learning and site, weaving together program and environment
+                    into a thoughtful composition of interconnected masses. This
+                    approach breaks down the building’s overall scale, creating
+                    a more human-centered experience that fosters comfort,
+                    connection, and engagement within the learning environment.
+                  </p>
                 </div>
               )}
               {visibleSection === "design" && (
                 <div id="design">
-                  <h5>Design</h5>
+                  <SelectLabels intent="Design Options" />
                 </div>
               )}
-              {visibleSection === "help" && (
-                <div id="help">
-                  <h5>Help</h5>
-                </div>
-              )}
+              {visibleSection === "help" && <div id="help"></div>}
             </>
           )}
         </Box>
