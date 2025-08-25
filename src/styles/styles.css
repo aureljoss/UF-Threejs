@@ -136,8 +136,6 @@ a{
     z-index: 1;
 }
 
-
-
 .markers:hover {
   transform: scale(1.2);
 }
@@ -167,8 +165,6 @@ a{
 
 .simple-container {
   position:absolute;
-  width: 30vw;
-  min-width: 480px;
   z-index: 2;
 }
 

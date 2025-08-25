@@ -26,21 +26,10 @@ root.render(
   <>
     <div id="canvas-container">
       <Canvas
-        // orthographic
         flat
-        // camera={ {
-        //     fov: 55,
-        //     zoom:100,
-        //     near: 0.01,
-        //     // far: 100,
-        //     // far: 10000,
-        //     position: [ 0,0,16 ]
-        // } }
         camera={{
           fov: 35,
           near: 0.01,
-          // far: 100,
-          // far: 10000,
           position: [-10, 10, 30],
         }}
       >
@@ -62,11 +51,3 @@ root.render(
     </div>
   </>
 );
-
-// const overlay = ReactDOM.createRoot(document.querySelector("#overlay"));
-
-// overlay.render(
-//   <>
-//     <SimpleContainer className="simple-container" />
-//   </>
-// )

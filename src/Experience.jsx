@@ -17,7 +17,7 @@ import { Perf } from "r3f-perf";
 import HtmlText from "./components/HtmlText";
 import LocationMarker from "./components/LocationMarker";
 
-//Importent glb models
+//Important glb models
 const models = [
   {
     label: "Option 1 Blocking",
@@ -32,44 +32,6 @@ const models = [
   //   meshKey: "bakedOpt1Massing",
   // },
 ];
-
-// function CameraScrollAnimation() {
-//   const { camera } = useThree();
-//   const scroll = useScroll();
-
-//   useFrame(() => {
-//     // Get normalized scroll value (0 to 1)
-//     const scrollValue = scroll.offset;
-
-//       // gsap.to(camera.position, {
-//       //   x: 5 + scrollValue * 0.01,
-//       //   y: 3 + scrollValue * 0.005,
-//       //   z: 10 - scrollValue * 0.02,
-//       //   duration: 1,
-//       //   overwrite: "auto",
-//       // });
-//       // gsap.to(camera.rotation, {
-//       //   x: 0,
-//       //   y: Math.PI / 4 + scrollValue * 0.0005,
-//       //   z: 0,
-//       //   duration: 1,
-//       //   overwrite: "auto",
-//       // });
-
-//     // Animate camera position, rotation, and zoom based on scroll
-//     camera.position.x = -10 + scrollValue * 20; // from -10 to 10
-//     camera.position.y = 10 - scrollValue * 5; // from 10 to 5
-//     camera.position.z = 16 - scrollValue * 10; // from 16 to 6
-//     camera.rotation.y = scrollValue * Math.PI * 0.5; // rotate up to 90deg
-//     camera.zoom = 1 + scrollValue * 1.5; // zoom from 1 to 2.5
-
-//     camera.lookAt(0, 0, 0)
-
-//     camera.updateProjectionMatrix();
-//   });
-
-//   return null;
-// }
 
 export default function Experience() {
   const { Option } = useControls({
