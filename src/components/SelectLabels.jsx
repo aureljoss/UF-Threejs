@@ -14,7 +14,7 @@ export default function SelectLabels(labels) {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 180 }}>
+      <FormControl sx={{ m: 1, minWidth: 180 }} size="small">
         <InputLabel id="demo-simple-select-helper-label">{labels.intent}</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"

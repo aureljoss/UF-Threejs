@@ -47,7 +47,7 @@ root.render(
       </Canvas>
     </div>
     <div className="simple-container">
-      <SimpleContainer />
+      <SimpleContainer/>
     </div>
   </>
 );

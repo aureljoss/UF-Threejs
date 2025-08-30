@@ -13,6 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import SelectLabels from "./SelectLabels";
 import MyImageComponent from "./ImageContainer";
 import ProjectModal from "./ProjectModal";
+import ProjectPage from "./ProjectPage";
 
 export default function SimpleContainer() {
   const [isShown, setIsShown] = useState(false);
@@ -35,8 +36,13 @@ export default function SimpleContainer() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <div style={{ display: "flex", alignItems: "flex-start" }}>
-        <Container maxWidth="sm">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+        }}
+      >
+        <Container maxWidth="xs">
           <Box
             sx={{
               bgcolor: "rgba(255, 255, 255, 0.4)",
@@ -48,13 +54,12 @@ export default function SimpleContainer() {
               alignItems: "center",
               border: "white 1px solid",
               maxHeight: "80vh",
-              overflow: "hidden", // Prevent content from overflowing parent
             }}
           >
             <Fab
               color="primary"
               aria-label="add"
-              size="medium"
+              size="small"
               onClick={handleClick}
             >
               {isShown ? <RemoveIcon /> : <AddIcon />}
@@ -74,6 +79,7 @@ export default function SimpleContainer() {
                         ? "contained"
                         : "outlined"
                     }
+                    size="small"
                     onClick={() => sectionClick("program blocking")}
                   >
                     Program Blocking
@@ -82,6 +88,7 @@ export default function SimpleContainer() {
                     variant={
                       visibleSection === "design" ? "contained" : "outlined"
                     }
+                    size="small"
                     onClick={() => sectionClick("design")}
                   >
                     Design
@@ -90,49 +97,47 @@ export default function SimpleContainer() {
                     variant={
                       visibleSection === "help" ? "contained" : "outlined"
                     }
+                    size="small"
                     onClick={() => sectionClick("help")}
                   >
                     Help
                   </Button>
                 </Stack>
                 {visibleSection === "program blocking" && (
-                  <div id="program blocking" style={{ width: "100%" }}>
+                  <>
                     <SelectLabels intent="Blocking Options" />
-                    <Box
-                      sx={{
-                        height: "40vh", // Limit height of inner Box
-                        overflowY: "auto", // Enable vertical scrolling
-                        border: "1px solid grey",
-                        p: 2,
-                        bgcolor: "rgba(255, 255, 255, 0.4)",
-                        borderRadius: "20px",
-                        padding: "20px",
-                        backdropFilter: "blur(10px)",
-                        border: "white 1px solid",
+                    <div
+                      id="program blocking"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        overflow: "auto",
                       }}
                     >
-                      <MyImageComponent
-                        path="./public/images/opt1-blocking.png"
-                        description="A block and stack for option 1"
-                      />
-                      <p>
-                        The Terrace is envisioned as a welcoming gateway on the
-                        west side of the existing Dental Science Complex.
-                      </p>
-                      <p>
-                        {" "}
-                        The concept centers on the ecology of learning and site,
-                        weaving together program and environment into a
-                        thoughtful composition of interconnected masses.
-                      </p>
-                      <Button
-                        variant="outlined"
-                        onClick={() => showModal(true)}
+                      <Box
+                        sx={{
+                          overflowY: "auto", // Enable vertical scrolling
+                          // border: "white 1px solid",
+                          p: 2,
+                          bgcolor: "rgba(255, 255, 255, 0.0)",
+                          borderRadius: "20px",
+                          padding: "20px",
+                          // backdropFilter: "blur(10px)",
+                        }}
                       >
-                        Show {openModal ? "Less" : "More"}
-                      </Button>
-                    </Box>
-                  </div>
+                        <MyImageComponent
+                          path="./public/images/opt1-blocking.png"
+                          description="A block and stack for option 1"
+                        />
+                        <Button
+                          variant="outlined"
+                          onClick={() => showModal(true)}
+                        >
+                          Show {openModal ? "Less" : "More"}
+                        </Button>
+                      </Box>
+                    </div>
+                  </>
                 )}
                 {visibleSection === "design" && (
                   <div id="design">
@@ -154,45 +159,7 @@ export default function SimpleContainer() {
             )}
           </Box>
         </Container>
-        {openModal && (
-          <Container maxWidth="lg">
-            <Box
-              sx={{
-                bgcolor: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "20px",
-                padding: "20px",
-                backdropFilter: "blur(10px)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                border: "white 1px solid",
-                maxHeight: "80vh",
-                overflow: "hidden", // Prevent content from overflowing parent
-              }}
-            >
-              <>
-                <div id="design">
-                  <Fab size="medium">
-                    <CloseIcon
-                      fontSize="medium"
-                      onClick={() => showModal(false)}
-                    />
-                  </Fab>
-                  <MyImageComponent
-                    path="./public/images/opt1-massing.png"
-                    description="A block and stack for option 1"
-                  />
-                  <p>
-                    {" "}
-                    This approach breaks down the building’s overall scale,
-                    creating a more human-centered experience that fosters
-                    comfort, connection, and engagement.
-                  </p>
-                </div>
-              </>
-            </Box>
-          </Container>
-        )}
+        {openModal && <ProjectPage showModal={setOpenModal} />}
       </div>
       {/* {openModal && <ProjectModal onClose={showModal} openModal="true" />} */}
     </React.Fragment>
