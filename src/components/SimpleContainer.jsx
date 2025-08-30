@@ -80,7 +80,11 @@ export default function SimpleContainer() {
                         : "outlined"
                     }
                     size="small"
-                    onClick={() => sectionClick("program blocking")}
+                    onClick={() => {
+                      sectionClick("program blocking");
+                      showModal(false);
+                      setOpenModal(false);
+                    }}
                   >
                     Program Blocking
                   </Button>
@@ -89,7 +93,11 @@ export default function SimpleContainer() {
                       visibleSection === "design" ? "contained" : "outlined"
                     }
                     size="small"
-                    onClick={() => sectionClick("design")}
+                    onClick={() => {
+                      sectionClick("design");
+                      showModal(false);
+                      setOpenModal(false);
+                    }}
                   >
                     Design
                   </Button>
@@ -98,7 +106,11 @@ export default function SimpleContainer() {
                       visibleSection === "help" ? "contained" : "outlined"
                     }
                     size="small"
-                    onClick={() => sectionClick("help")}
+                    onClick={() => {
+                      sectionClick("help");
+                      showModal(false);
+                      setOpenModal(false);
+                    }}
                   >
                     Help
                   </Button>
@@ -131,7 +143,9 @@ export default function SimpleContainer() {
                         />
                         <Button
                           variant="outlined"
-                          onClick={() => showModal(true)}
+                          onClick={() => {
+                            showModal(true);
+                          }}
                         >
                           Show {openModal ? "Less" : "More"}
                         </Button>
@@ -152,6 +166,14 @@ export default function SimpleContainer() {
                       creating a more human-centered experience that fosters
                       comfort, connection, and engagement.
                     </p>
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        showModal(true);
+                      }}
+                    >
+                      Show {openModal ? "Less" : "More"}
+                    </Button>
                   </div>
                 )}
                 {visibleSection === "help" && <div id="help"></div>}
@@ -159,7 +181,12 @@ export default function SimpleContainer() {
             )}
           </Box>
         </Container>
-        {openModal && <ProjectPage showModal={setOpenModal} />}
+        {openModal && (
+          <ProjectPage
+            showModal={setOpenModal}
+            content={visibleSection === "design" ? "design" : "blocking"}
+          />
+        )}
       </div>
       {/* {openModal && <ProjectModal onClose={showModal} openModal="true" />} */}
     </React.Fragment>
