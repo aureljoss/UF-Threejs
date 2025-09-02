@@ -170,6 +170,12 @@ a{
   z-index: 2;
 }
 
+.overview{
+  width: "100%";
+  height: "100%";
+  overflow: "auto";
+}
+
 footer nav{
   position:absolute;
   bottom: 2vh;

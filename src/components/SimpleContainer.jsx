@@ -15,18 +15,15 @@ import MyImageComponent from "./ImageContainer";
 import ProjectModal from "./ProjectModal";
 import ProjectPage from "./ProjectPage";
 
-export default function SimpleContainer() {
+export default function SimpleContainer(props) {
   const [isShown, setIsShown] = useState(false);
   const [visibleSection, setVisibleSection] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [option, setOption] = useState("");
 
   const handleClick = () => {
     setIsShown((current) => !current);
     setVisibleSection(null); // Hide all sections when toggling main panel
-  };
-
-  const sectionClick = (section) => {
-    setVisibleSection((current) => (current === section ? null : section));
   };
 
   const showModal = () => {
@@ -75,108 +72,121 @@ export default function SimpleContainer() {
                 >
                   <Button
                     variant={
+                      visibleSection === "site" ? "contained" : "outlined"
+                    }
+                    size="small"
+                    onClick={() => {
+                      // sectionClick("site");
+                      showModal(false);
+                      setOpenModal(false);
+                      setVisibleSection("site");
+                    }}
+                  >
+                    Site
+                  </Button>
+                  {/* Program Blocking Tab */}
+                  <Button
+                    variant={
                       visibleSection === "program blocking"
                         ? "contained"
                         : "outlined"
                     }
                     size="small"
                     onClick={() => {
-                      sectionClick("program blocking");
+                      // sectionClick("program blocking");
                       showModal(false);
                       setOpenModal(false);
+                      setVisibleSection("program blocking");
+                      props.tabChange("Program Blocking");
                     }}
                   >
                     Program Blocking
                   </Button>
+
+                  {/* Design Tab */}
                   <Button
                     variant={
                       visibleSection === "design" ? "contained" : "outlined"
                     }
                     size="small"
                     onClick={() => {
-                      sectionClick("design");
+                      // sectionClick("design");
                       showModal(false);
                       setOpenModal(false);
+                      setVisibleSection("design");
+                      props.tabChange("Design");
                     }}
                   >
                     Design
                   </Button>
-                  <Button
-                    variant={
-                      visibleSection === "help" ? "contained" : "outlined"
-                    }
-                    size="small"
-                    onClick={() => {
-                      sectionClick("help");
-                      showModal(false);
-                      setOpenModal(false);
-                    }}
-                  >
-                    Help
-                  </Button>
                 </Stack>
+
+                {/* Content Section */}
                 {visibleSection === "program blocking" && (
                   <>
-                    <SelectLabels intent="Blocking Options" />
-                    <div
-                      id="program blocking"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        overflow: "auto",
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          overflowY: "auto", // Enable vertical scrolling
-                          // border: "white 1px solid",
-                          p: 2,
-                          bgcolor: "rgba(255, 255, 255, 0.0)",
-                          borderRadius: "20px",
-                          padding: "20px",
-                          // backdropFilter: "blur(10px)",
+                    <SelectLabels intent="Blocking Option" />
+                    <div id="program blocking" className="overview">
+                      <MyImageComponent
+                        path="./public/images/opt1-blocking.png"
+                        description="A block and stack for option 1"
+                      />
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          showModal(true);
                         }}
                       >
-                        <MyImageComponent
-                          path="./public/images/opt1-blocking.png"
-                          description="A block and stack for option 1"
-                        />
-                        <Button
-                          variant="outlined"
-                          onClick={() => {
-                            showModal(true);
-                          }}
-                        >
-                          Show {openModal ? "Less" : "More"}
-                        </Button>
-                      </Box>
+                        Show {openModal ? "Less" : "More"}
+                      </Button>
                     </div>
                   </>
                 )}
                 {visibleSection === "design" && (
-                  <div id="design">
+                  <>
                     <SelectLabels intent="Design Options" />
-                    <MyImageComponent
-                      path="./public/images/opt1-massing.png"
-                      description="A block and stack for option 1"
-                    />
-                    <p>
-                      {" "}
-                      This approach breaks down the building’s overall scale,
-                      creating a more human-centered experience that fosters
-                      comfort, connection, and engagement.
-                    </p>
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        showModal(true);
-                      }}
-                    >
-                      Show {openModal ? "Less" : "More"}
-                    </Button>
-                  </div>
+                    <div id="design">
+                      <MyImageComponent
+                        path="./public/images/opt1-massing.png"
+                        description="A block and stack for option 1"
+                      />
+                      <p>
+                        {" "}
+                        This approach breaks down the building’s overall scale,
+                        creating a more human-centered experience that fosters
+                        comfort, connection, and engagement.
+                      </p>
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          showModal(true);
+                          console.log(visibleSection);
+                        }}
+                      >
+                        Show {openModal ? "Less" : "More"}
+                      </Button>
+                    </div>
+                  </>
                 )}
-                {visibleSection === "help" && <div id="help"></div>}
+                {visibleSection === "site" && (
+                  <>
+                    <div id="site" style={{ marginTop: "20px" }}>
+                      <MyImageComponent
+                        path="./public/images/site.png"
+                        description="A block and stack for option 1"
+                      />
+                      <p> Blah blah blah - cool site - blah blah blah</p>
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          showModal(true);
+                          console.log(visibleSection);
+                        }}
+                      >
+                        Show {openModal ? "Less" : "More"}
+                      </Button>
+                    </div>
+                  </>
+                )}
               </>
             )}
           </Box>
@@ -184,7 +194,8 @@ export default function SimpleContainer() {
         {openModal && (
           <ProjectPage
             showModal={setOpenModal}
-            content={visibleSection === "design" ? "design" : "blocking"}
+            content={visibleSection}
+            option={option}
           />
         )}
       </div>

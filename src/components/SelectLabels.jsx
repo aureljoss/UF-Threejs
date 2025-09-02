@@ -20,6 +20,7 @@ export default function SelectLabels(labels) {
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           value={options}
+          defaultValue="Option 1"
           label={labels.intent}
           onChange={handleChange}
         >

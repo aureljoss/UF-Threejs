@@ -8,7 +8,7 @@ import {
   Html,
   ScrollControls,
 } from "@react-three/drei";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useControls } from "leva";
 import { DoubleSide } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -18,30 +18,46 @@ import HtmlText from "./components/HtmlText";
 import LocationMarker from "./components/LocationMarker";
 
 //Important glb models
-const models = [
+const programModels = [
   {
+    tab: "Program Blocking",
+    option: "Option 1",
     label: "Option 1 Blocking",
     glb: "./static/model/opt1-blocking.glb",
     texture: "./static/model/opt1-blocking.jpg",
     meshKey: "bakedOpt1Blocking",
   },
+];
+
+const designModels = [
+  {
+    tab: "Design",
+    option: "Option 1",
+    label: "Option 1 Massing",
+    glb: "./static/model/opt1-massing.glb",
+    texture: "./static/model/opt1-massing.jpg",
+    meshKey: "bakedOpt1Massing",
+  },
   // {
-  //   label: "Option 1 Massing",
-  //   glb: "./static/model/opt1-massing.glb",
-  //   texture: "./static/model/opt1-massing.jpg",
-  //   meshKey: "bakedOpt1Massing",
+  //   tab: "Design",
+  //   option: "Option 2",
+  //   label: "Design - Option 2",
+  //   glb: "./static/model/opt2-massing.glb",
+  //   texture: "./static/model/opt2-massing.jpg",
+  //   meshKey: "bakedOpt2Massing",
   // },
 ];
 
-export default function Experience() {
-  const { Option } = useControls({
-    Option: {
-      value: models[0].label,
-      options: models.map((m) => m.label),
-    },
-  });
+export default function Experience(props) {
+  const [selectedModel, setSelectedModel] = useState(programModels[0]);
 
-  const selectedModel = models.find((m) => m.label === Option);
+  useEffect(() => {
+    if (props.sendTabChange === "Design") {
+      setSelectedModel(designModels[0]);
+    } else if (props.sendTabChange === "Program Blocking") {
+      setSelectedModel(programModels[0]);
+    }
+  }, [props.sendTabChange]);
 
   const gltf = useGLTF(selectedModel.glb);
   const texture = useTexture(selectedModel.texture);
@@ -123,6 +139,7 @@ export default function Experience() {
             <meshBasicMaterial map={treesTexture} />
           </mesh>
 
+          {/* Selected Model */}
           <mesh
             geometry={gltf.nodes[selectedModel.meshKey].geometry}
             position={[0, 0.004, 0]}
@@ -131,6 +148,7 @@ export default function Experience() {
             <meshBasicMaterial map={texture} />
           </mesh>
 
+          {/* Location Marker */}
           <LocationMarker
             position={[-1.6, 0.4, 3.8]}
             distanceFactor={4}
@@ -138,54 +156,56 @@ export default function Experience() {
           />
 
           {/* HTML Markers */}
-          <HtmlText
-            position={[-4, 1, 3]}
-            text="Shands Parking"
-            distanceFactor={4}
-            showArrow={true}
-          />
-          <HtmlText
-            position={[2.7, 1.6, 7.2]}
-            text="VA Hospital"
-            distanceFactor={4}
-            showArrow={true}
-          />
-          <HtmlText
-            position={[9.8, 2.6, 2.5]}
-            text="UF Health Shands Cancer Hospital"
-            distanceFactor={4}
-            showArrow={true}
-          />
-          <HtmlText
-            position={[8.4, 2.9, -1]}
-            text="UF Health Shands Hospital "
-            distanceFactor={4}
-            showArrow={true}
-          />
-          <HtmlText
-            position={[2, 2.35, 0]}
-            text="UF College of Dentistry "
-            distanceFactor={4}
-            showArrow={true}
-          />
-          <HtmlText
-            position={[-11, 0.9, 7]}
-            text="UF Health Medical Plaza "
-            distanceFactor={4}
-            showArrow={true}
-          />
-          <HtmlText
-            position={[-0.5, 1.2, -3.2]}
-            text="UF Biomedical Sciences "
-            distanceFactor={4}
-            showArrow={true}
-          />
-                    <HtmlText
-            position={[2, 1.4, -4]}
-            text="Stetson Medical Sciences "
-            distanceFactor={4}
-            showArrow={true}
-          />
+          <>
+            <HtmlText
+              position={[-4, 1, 3]}
+              text="Shands Parking"
+              distanceFactor={4}
+              showArrow={true}
+            />
+            <HtmlText
+              position={[2.7, 1.6, 7.2]}
+              text="VA Hospital"
+              distanceFactor={4}
+              showArrow={true}
+            />
+            <HtmlText
+              position={[9.8, 2.6, 2.5]}
+              text="UF Health Shands Cancer Hospital"
+              distanceFactor={4}
+              showArrow={true}
+            />
+            <HtmlText
+              position={[8.4, 2.9, -1]}
+              text="UF Health Shands Hospital "
+              distanceFactor={4}
+              showArrow={true}
+            />
+            <HtmlText
+              position={[2, 2.35, 0]}
+              text="UF College of Dentistry "
+              distanceFactor={4}
+              showArrow={true}
+            />
+            <HtmlText
+              position={[-11, 0.9, 7]}
+              text="UF Health Medical Plaza "
+              distanceFactor={4}
+              showArrow={true}
+            />
+            <HtmlText
+              position={[-0.5, 1.2, -3.2]}
+              text="UF Biomedical Sciences "
+              distanceFactor={4}
+              showArrow={true}
+            />
+            <HtmlText
+              position={[2, 1.4, -4]}
+              text="Stetson Medical Sciences "
+              distanceFactor={4}
+              showArrow={true}
+            />
+          </>
         </group>
       </Center>
       {/* </ScrollControls> */}
