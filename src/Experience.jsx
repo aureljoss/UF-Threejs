@@ -23,8 +23,8 @@ const programModels = [
     tab: "Program Blocking",
     option: "Option 1",
     label: "Option 1 Blocking",
-    glb: "./static/model/opt1-blocking.glb",
-    texture: "./static/model/opt1-blocking.jpg",
+    glb: "./model/opt1-blocking.glb",
+    texture: "./model/opt1-blocking.jpg",
     meshKey: "bakedOpt1Blocking",
   },
 ];
@@ -34,16 +34,16 @@ const designModels = [
     tab: "Design",
     option: "Option 1",
     label: "Option 1 Massing",
-    glb: "./static/model/opt1-massing.glb",
-    texture: "./static/model/opt1-massing.jpg",
+    glb: "./model/opt1-massing.glb",
+    texture: "./model/opt1-massing.jpg",
     meshKey: "bakedOpt1Massing",
   },
   // {
   //   tab: "Design",
   //   option: "Option 2",
   //   label: "Design - Option 2",
-  //   glb: "./static/model/opt2-massing.glb",
-  //   texture: "./static/model/opt2-massing.jpg",
+  //   glb: "./model/opt2-massing.glb",
+  //   texture: "./model/opt2-massing.jpg",
   //   meshKey: "bakedOpt2Massing",
   // },
 ];
@@ -64,18 +64,18 @@ export default function Experience(props) {
   texture.flipY = false;
 
   //Site
-  const { nodes } = useGLTF("./static/model/site.glb");
-  const siteTexture = useTexture("./static/model/site-baked-op1-blocking.jpg");
+  const { nodes } = useGLTF("./model/site.glb");
+  const siteTexture = useTexture("./model/site-baked-op1-blocking.jpg");
   siteTexture.flipY = false;
 
   //Buildings
-  const { nodes: buildingsNodes } = useGLTF("./static/model/buildings.glb");
-  const buildingsTexture = useTexture("./static/model/buildings-baked.jpg");
+  const { nodes: buildingsNodes } = useGLTF("./model/buildings.glb");
+  const buildingsTexture = useTexture("./model/buildings-baked.jpg");
   buildingsTexture.flipY = false;
 
   // //Trees
-  const { nodes: treesNodes } = useGLTF("./static/model/trees.glb");
-  const treesTexture = useTexture("./static/model/trees-baked.jpg");
+  const { nodes: treesNodes } = useGLTF("./model/trees.glb");
+  const treesTexture = useTexture("./model/trees-baked.jpg");
   treesTexture.flipY = false;
 
   const [showModal, setShowModal] = useState(false);

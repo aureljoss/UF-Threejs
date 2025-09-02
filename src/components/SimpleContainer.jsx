@@ -70,6 +70,7 @@ export default function SimpleContainer(props) {
                     marginTop: "20px",
                   }}
                 >
+                  {/* Site Tab */}
                   <Button
                     variant={
                       visibleSection === "site" ? "contained" : "outlined"

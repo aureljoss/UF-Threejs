@@ -12,7 +12,7 @@ const contentData = {
       title: "Blocking Option 1",
       images: [
         {
-          path: "./public/images/opt1-blocking.png",
+          path: "/images/opt1-blocking.png",
           description: "A block and stack for option 1",
         },
       ],
@@ -23,7 +23,7 @@ const contentData = {
       title: "Blocking Option 2",
       images: [
         {
-          path: "./public/images/opt2-blocking.png",
+          path: "/images/opt2-blocking.png",
           description: "A block and stack for option 2",
         },
       ],
@@ -35,19 +35,19 @@ const contentData = {
       title: "Design Option 1",
       images: [
         {
-          path: "./public/images/opt1-massing.png",
+          path: "/images/opt1-massing.png",
           description: "A block and stack for option 1",
         },
         {
-          path: "./public/images/op1-c02 EDITS.jpg",
+          path: "/images/op1-c02 EDITS.jpg",
           description: "Exterior Rendering",
         },
         {
-          path: "./public/images/op1-c01 EDITS.jpg",
+          path: "/images/op1-c01 EDITS.jpg",
           description: "Exterior Rendering",
         },
         {
-          path: "./public/images/opt1-site.png",
+          path: "/images/opt1-site.png",
           description: "Exterior Rendering",
         },
       ],
@@ -58,7 +58,7 @@ const contentData = {
       title: "Design Option 2",
       images: [
         {
-          path: "./public/images/opt2-massing.png",
+          path: "/images/opt2-massing.png",
           description: "A block and stack for option 2",
         },
       ],
@@ -67,19 +67,10 @@ const contentData = {
   },
   site: {
     option1: {
-      title: "Site Plan",
+      title: "Site",
       images: [
-        { path: "./public/images/opt1-site.png", description: "Site Plan" },
-      ],
-      description: "",
-    },
-    option2: {
-      title: "Site Plan Option 2",
-      images: [
-        {
-          path: "./public/images/opt2-site.png",
-          description: "Site Plan Option 2",
-        },
+        { path: "/images/opt1-site.png", description: "Site Plan" },
+        { path: "/images/site.png", description: "Site Plan" },
       ],
       description: "",
     },
