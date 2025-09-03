@@ -12,6 +12,7 @@ import HtmlText from "./components/HtmlText";
 import LocationMarker from "./components/LocationMarker";
 import CameraMarker from "./components/CameraMarker";
 import CameraPage from "./components/CameraPage";
+import MyImageComponent from "./components/ImageContainer";
 
 //Important glb models
 const programModels = [
@@ -82,6 +83,12 @@ export default function Experience(props) {
 
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [showDesignCamera, setShowDesignCamera] = useState(false);
+  const [showDesignModal, setShowDesignModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const showModal = () => {
+    setShowDesignModal((current) => !current);
+  };
 
   return (
     <>
@@ -158,7 +165,19 @@ export default function Experience(props) {
             <CameraMarker
               position={[1.7, 0.2, 5.2]}
               distanceFactor={4}
-              onClick={() => setShowProjectModal(true)}
+              onClick={() => {
+                setShowDesignModal(true);
+                setOpenModal(true);
+                setShowDesignModal(true);
+              }}
+            />
+          )}
+
+          {showDesignModal && (
+            <CameraPage
+              showModal={setShowDesignModal}
+              content="design"
+              option="option1"
             />
           )}
 
