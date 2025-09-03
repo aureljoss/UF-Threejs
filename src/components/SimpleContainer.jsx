@@ -114,6 +114,7 @@ export default function SimpleContainer(props) {
                       // sectionClick("design");
                       showModal(false);
                       setOpenModal(false);
+                      setOption("option1")
                       setVisibleSection("design");
                       props.tabChange("Design");
                     }}
@@ -128,7 +129,7 @@ export default function SimpleContainer(props) {
                     <SelectLabels intent="Blocking Option" />
                     <div id="program blocking" className="overview">
                       <MyImageComponent
-                        path="./public/images/opt1-blocking.png"
+                        path="./images/opt1-blocking.png"
                         description="A block and stack for option 1"
                       />
                       <Button
@@ -147,7 +148,7 @@ export default function SimpleContainer(props) {
                     <SelectLabels intent="Design Options" />
                     <div id="design">
                       <MyImageComponent
-                        path="./public/images/opt1-massing.png"
+                        path="./images/opt1-massing.png"
                         description="A block and stack for option 1"
                       />
                       <p>
@@ -172,7 +173,7 @@ export default function SimpleContainer(props) {
                   <>
                     <div id="site" style={{ marginTop: "20px" }}>
                       <MyImageComponent
-                        path="./public/images/site.png"
+                        path="./images/site.png"
                         description="A block and stack for option 1"
                       />
                       <p> Blah blah blah - cool site - blah blah blah</p>
@@ -200,7 +201,6 @@ export default function SimpleContainer(props) {
           />
         )}
       </div>
-      {/* {openModal && <ProjectModal onClose={showModal} openModal="true" />} */}
     </React.Fragment>
   );
 }

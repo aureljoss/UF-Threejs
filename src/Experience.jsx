@@ -1,21 +1,17 @@
 import {
   OrbitControls,
   useGLTF,
-  useScroll,
   useTexture,
   CameraShake,
   Center,
   Html,
-  ScrollControls,
 } from "@react-three/drei";
-import { useState, useRef, useEffect } from "react";
-import { useControls } from "leva";
+import { useState, useEffect } from "react";
 import { DoubleSide } from "three";
-import { useFrame, useThree } from "@react-three/fiber";
-import { gsap } from "gsap";
-import { Perf } from "r3f-perf";
 import HtmlText from "./components/HtmlText";
 import LocationMarker from "./components/LocationMarker";
+import CameraMarker from "./components/CameraMarker";
+import CameraPage from "./components/CameraPage";
 
 //Important glb models
 const programModels = [
@@ -35,7 +31,7 @@ const designModels = [
     option: "Option 1",
     label: "Option 1 Massing",
     glb: "./model/opt1-massing.glb",
-    texture: "./model/opt1-massing.jpg",
+    texture: "./model/opt1-Massing.jpg",
     meshKey: "bakedOpt1Massing",
   },
   // {
@@ -50,12 +46,18 @@ const designModels = [
 
 export default function Experience(props) {
   const [selectedModel, setSelectedModel] = useState(programModels[0]);
+  const [siteModel, setSiteModel] = useState(
+    "./model/site-baked-op1-blocking.jpg"
+  );
 
   useEffect(() => {
     if (props.sendTabChange === "Design") {
       setSelectedModel(designModels[0]);
+      setSiteModel("./model/site-baked-opt1Massing.jpg");
+      setShowDesignCamera(true);
     } else if (props.sendTabChange === "Program Blocking") {
       setSelectedModel(programModels[0]);
+      setSiteModel("./model/site-baked-op1-blocking.jpg");
     }
   }, [props.sendTabChange]);
 
@@ -65,7 +67,7 @@ export default function Experience(props) {
 
   //Site
   const { nodes } = useGLTF("./model/site.glb");
-  const siteTexture = useTexture("./model/site-baked-op1-blocking.jpg");
+  const siteTexture = useTexture(siteModel);
   siteTexture.flipY = false;
 
   //Buildings
@@ -78,7 +80,8 @@ export default function Experience(props) {
   const treesTexture = useTexture("./model/trees-baked.jpg");
   treesTexture.flipY = false;
 
-  const [showModal, setShowModal] = useState(false);
+  const [showProjectModal, setShowProjectModal] = useState(false);
+  const [showDesignCamera, setShowDesignCamera] = useState(false);
 
   return (
     <>
@@ -105,11 +108,6 @@ export default function Experience(props) {
         decayRate={0.8}
       />
 
-      {/*Performance Monitoring */}
-      {/* <Perf position="bottom-left" /> */}
-
-      {/* <ScrollControls pages={4} damping={0.25}> */}
-      {/* <CameraScrollAnimation /> */}
       <Center>
         <group>
           {/* Site */}
@@ -150,10 +148,19 @@ export default function Experience(props) {
 
           {/* Location Marker */}
           <LocationMarker
-            position={[-1.6, 0.4, 3.8]}
+            position={[7.4, 0.4, 0.2]}
             distanceFactor={4}
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowProjectModal(true)}
           />
+
+          {/* Camera Marker OPTION 1*/}
+          {showDesignCamera === true && props.sendTabChange === "Design" && (
+            <CameraMarker
+              position={[1.7, 0.2, 5.2]}
+              distanceFactor={4}
+              onClick={() => setShowProjectModal(true)}
+            />
+          )}
 
           {/* HTML Markers */}
           <>
@@ -171,31 +178,31 @@ export default function Experience(props) {
             />
             <HtmlText
               position={[9.8, 2.6, 2.5]}
-              text="UF Health Shands Cancer Hospital"
+              text="Shands Cancer Hospital"
               distanceFactor={4}
               showArrow={true}
             />
             <HtmlText
               position={[8.4, 2.9, -1]}
-              text="UF Health Shands Hospital "
+              text="Shands Hospital "
               distanceFactor={4}
               showArrow={true}
             />
             <HtmlText
               position={[2, 2.35, 0]}
-              text="UF College of Dentistry "
+              text="College of Dentistry "
               distanceFactor={4}
               showArrow={true}
             />
             <HtmlText
               position={[-11, 0.9, 7]}
-              text="UF Health Medical Plaza "
+              text="Health Medical Plaza "
               distanceFactor={4}
               showArrow={true}
             />
             <HtmlText
               position={[-0.5, 1.2, -3.2]}
-              text="UF Biomedical Sciences "
+              text="Biomedical Sciences "
               distanceFactor={4}
               showArrow={true}
             />
@@ -210,7 +217,7 @@ export default function Experience(props) {
       </Center>
       {/* </ScrollControls> */}
 
-      {showModal && (
+      {showProjectModal && (
         <Html fullscreen>
           <div
             style={{
@@ -231,7 +238,7 @@ export default function Experience(props) {
             }}
           >
             <button
-              onClick={() => setShowModal(false)}
+              onClick={() => setShowProjectModal(false)}
               style={{
                 position: "absolute",
                 top: "1rem",
