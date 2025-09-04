@@ -17,10 +17,17 @@ import { ViewHeadline } from "@mui/icons-material";
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
 function App() {
-    const [visibleSection, setVisibleSection] = useState("Program Blocking");
-  
-    const tabChange=(dataFromChild)=>{
-      setVisibleSection(dataFromChild);    }
+  const [visibleSection, setVisibleSection] = useState("Program Blocking");
+  const [visibleOption, setVisibleOption] = useState("Option 1");
+
+  const tabChange = (dataFromChild) => {
+    setVisibleSection(dataFromChild);
+  };
+
+  const optionChange = (selectedOption) => {
+    setVisibleOption(selectedOption);
+  };
+
   return (
     <>
       <div id="canvas-container">
@@ -41,12 +48,15 @@ function App() {
             />
           </EffectComposer>
           <Suspense fallback={<LoaderScreen />}>
-            <Experience  sendTabChange={visibleSection} />
+            <Experience
+              sendTabChange={visibleSection}
+              sendOptionChange={visibleOption}
+            />
           </Suspense>
         </Canvas>
       </div>
       <div className="simple-container">
-        <SimpleContainer tabChange={tabChange} />
+        <SimpleContainer tabChange={tabChange} optionChange={optionChange} />
       </div>
     </>
   );

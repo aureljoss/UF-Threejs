@@ -19,7 +19,7 @@ export default function SimpleContainer(props) {
   const [isShown, setIsShown] = useState(false);
   const [visibleSection, setVisibleSection] = useState(null);
   const [openModal, setOpenModal] = useState(false);
-  const [option, setOption] = useState("");
+  const [option, setOption] = useState("1");
 
   const handleClick = () => {
     setIsShown((current) => !current);
@@ -114,7 +114,7 @@ export default function SimpleContainer(props) {
                       // sectionClick("design");
                       showModal(false);
                       setOpenModal(false);
-                      setOption("option1")
+                      setOption("option1");
                       setVisibleSection("design");
                       props.tabChange("Design");
                     }}
@@ -126,7 +126,18 @@ export default function SimpleContainer(props) {
                 {/* Content Section */}
                 {visibleSection === "program blocking" && (
                   <>
-                    <SelectLabels intent="Blocking Option" />
+                    <SelectLabels
+                      intent={
+                        props.sendTabChange === "Design"
+                          ? "Design Options"
+                          : "Blocking Options"
+                      }
+                      value={option}
+                      onChange={(selected) => {
+                        setOption(selected);
+                        props.optionChange(selected); // <-- send to parent
+                      }}
+                    />
                     <div id="program blocking" className="overview">
                       <MyImageComponent
                         path="./images/opt1-blocking.png"

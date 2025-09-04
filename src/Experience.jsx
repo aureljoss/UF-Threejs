@@ -23,6 +23,25 @@ const programModels = [
     glb: "./model/opt1-blocking.glb",
     texture: "./model/opt1-blocking.jpg",
     meshKey: "bakedOpt1Blocking",
+    siteTexture: "./model/site-baked-op1-blocking.jpg",
+  },
+  {
+    tab: "Program Blocking",
+    option: "Option 2",
+    label: "Option 2 Blocking",
+    glb: "./model/opt2-blocking.glb",
+    texture: "./model/opt2-blocking.jpg",
+    meshKey: "bakedOpt2Blocking",
+    siteTexture: "./model/site-baked-op1-blocking.jpg",
+  },
+  {
+    tab: "Program Blocking",
+    option: "Option 3",
+    label: "Option 3 Blocking",
+    glb: "./model/opt2-blocking.glb",
+    texture: "./model/opt2-blocking.jpg",
+    meshKey: "bakedOpt2Blocking",
+    siteTexture: "./model/site-baked-op1-blocking.jpg",
   },
 ];
 
@@ -34,6 +53,7 @@ const designModels = [
     glb: "./model/opt1-massing.glb",
     texture: "./model/opt1-Massing.jpg",
     meshKey: "bakedOpt1Massing",
+    siteTexture: "./model/site-baked-opt1Massing.jpg",
   },
   // {
   //   tab: "Design",
@@ -42,6 +62,7 @@ const designModels = [
   //   glb: "./model/opt2-massing.glb",
   //   texture: "./model/opt2-massing.jpg",
   //   meshKey: "bakedOpt2Massing",
+      // siteTexture: "./model/site-baked-op1-blocking.jpg",
   // },
 ];
 
@@ -50,17 +71,41 @@ export default function Experience(props) {
   const [siteModel, setSiteModel] = useState(
     "./model/site-baked-op1-blocking.jpg"
   );
+  const [activeOption, setActiveOption] = useState("Option 1");
+  
+  // useEffect(() => {
+  //   // Reset to Option 1 when tab changes
+  //   setActiveOption("Option 1");
+  //   if (props.sendTabChange === "Design") {
+  //     setSelectedModel(designModels[0]);
+  //     setSiteModel("./model/site-baked-opt1Massing.jpg");
+  //     setShowDesignCamera(true);
+  //   } else if (props.sendTabChange === "Program Blocking") {
+  //     setSelectedModel(programModels[0]);
+  //     setSiteModel("./model/site-baked-op1-blocking.jpg");
+  //   }
+  // }, [props.sendTabChange]);
 
   useEffect(() => {
+    let selected;
     if (props.sendTabChange === "Design") {
-      setSelectedModel(designModels[0]);
+      selected = designModels.find(
+        (m) => m.option === `Option ${props.sendOptionChange}`
+      );
+      if (!selected) selected = designModels[0]; // fallback
+      setSelectedModel(selected);
       setSiteModel("./model/site-baked-opt1Massing.jpg");
       setShowDesignCamera(true);
     } else if (props.sendTabChange === "Program Blocking") {
-      setSelectedModel(programModels[0]);
+      selected = programModels.find(
+        (m) => m.option === `Option ${props.sendOptionChange}`
+      );
+      if (!selected) selected = programModels[0]; // fallback
+      setSelectedModel(selected);
       setSiteModel("./model/site-baked-op1-blocking.jpg");
+      setShowDesignCamera(false);
     }
-  }, [props.sendTabChange]);
+  }, [props.sendTabChange, props.sendOptionChange]);
 
   const gltf = useGLTF(selectedModel.glb);
   const texture = useTexture(selectedModel.texture);
@@ -68,7 +113,7 @@ export default function Experience(props) {
 
   //Site
   const { nodes } = useGLTF("./model/site.glb");
-  const siteTexture = useTexture(siteModel);
+  const siteTexture = useTexture(selectedModel.siteTexture);
   siteTexture.flipY = false;
 
   //Buildings
