@@ -97,6 +97,7 @@ export default function SimpleContainer(props) {
                       // sectionClick("program blocking");
                       showModal(false);
                       setOpenModal(false);
+                      setOption("1");
                       setVisibleSection("program blocking");
                       props.tabChange("Program Blocking");
                     }}
@@ -114,7 +115,7 @@ export default function SimpleContainer(props) {
                       // sectionClick("design");
                       showModal(false);
                       setOpenModal(false);
-                      setOption("option1");
+                      setOption("1");
                       setVisibleSection("design");
                       props.tabChange("Design");
                     }}
@@ -127,11 +128,7 @@ export default function SimpleContainer(props) {
                 {visibleSection === "program blocking" && (
                   <>
                     <SelectLabels
-                      intent={
-                        props.sendTabChange === "Design"
-                          ? "Design Options"
-                          : "Blocking Options"
-                      }
+                      intent="Program Blocking Options"
                       value={option}
                       onChange={(selected) => {
                         setOption(selected);
@@ -140,8 +137,8 @@ export default function SimpleContainer(props) {
                     />
                     <div id="program blocking" className="overview">
                       <MyImageComponent
-                        path="./images/opt1-blocking.png"
-                        description="A block and stack for option 1"
+                        path={option === "1" ? "./images/opt1-blocking.png" : "./images/Opt2-blocking.png"}
+                        description={option === "1" ? "A block and stack for option 1" : "A block and stack for option 2"}
                       />
                       <Button
                         variant="outlined"
@@ -156,7 +153,13 @@ export default function SimpleContainer(props) {
                 )}
                 {visibleSection === "design" && (
                   <>
-                    <SelectLabels intent="Design Options" />
+                    <SelectLabels intent="Design Options"           
+                    value={option}
+                      onChange={(selected) => {
+                        setOption(selected);
+                        props.optionChange(selected);
+                      }}
+                    />
                     <div id="design">
                       <MyImageComponent
                         path="./images/opt1-massing.png"

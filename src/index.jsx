@@ -5,7 +5,7 @@ import Experience from "./Experience.jsx";
 import * as THREE from "three";
 import React, { Suspense, useState } from "react";
 import { Html } from "@react-three/drei"; // for loading progress
-import { EffectComposer, DepthOfField } from "@react-three/postprocessing";
+// import { EffectComposer, DepthOfField } from "@react-three/postprocessing";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -39,14 +39,14 @@ function App() {
             position: [-10, 10, 30],
           }}
         >
-          <EffectComposer>
+          {/* <EffectComposer>
             <DepthOfField
               focusDistance={0.015}
               focalLength={0.05}
               bokehScale={2}
               height={480}
             />
-          </EffectComposer>
+          </EffectComposer> */}
           <Suspense fallback={<LoaderScreen />}>
             <Experience
               sendTabChange={visibleSection}

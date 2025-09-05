@@ -32,7 +32,7 @@ const programModels = [
     glb: "./model/opt2-blocking.glb",
     texture: "./model/opt2-blocking.jpg",
     meshKey: "bakedOpt2Blocking",
-    siteTexture: "./model/site-baked-op1-blocking.jpg",
+    siteTexture: "./model/site-baked-opt2-blocking.jpg",
   },
   {
     tab: "Program Blocking",
@@ -62,7 +62,7 @@ const designModels = [
   //   glb: "./model/opt2-massing.glb",
   //   texture: "./model/opt2-massing.jpg",
   //   meshKey: "bakedOpt2Massing",
-      // siteTexture: "./model/site-baked-op1-blocking.jpg",
+  // siteTexture: "./model/site-baked-op1-blocking.jpg",
   // },
 ];
 
@@ -72,7 +72,7 @@ export default function Experience(props) {
     "./model/site-baked-op1-blocking.jpg"
   );
   const [activeOption, setActiveOption] = useState("Option 1");
-  
+
   // useEffect(() => {
   //   // Reset to Option 1 when tab changes
   //   setActiveOption("Option 1");
@@ -130,6 +130,11 @@ export default function Experience(props) {
   const [showDesignCamera, setShowDesignCamera] = useState(false);
   const [showDesignModal, setShowDesignModal] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+
+  // People and Cars
+  const { nodes: peopleCarsNodes } = useGLTF("./model/bakedPeopleCars.glb");
+  const peopleCarsTexture = useTexture("./model/bakedPeopleCars.jpg");
+  peopleCarsTexture.flipY = false;
 
   const showModal = () => {
     setShowDesignModal((current) => !current);
@@ -189,6 +194,15 @@ export default function Experience(props) {
             <meshBasicMaterial map={treesTexture} />
           </mesh>
 
+          {/* People and Cars */}
+          <mesh
+            geometry={peopleCarsNodes.bakedPeopleCars.geometry}
+            position={[0, 0, 0]}
+            scale={[0.01, 0.01, 0.01]}
+          >
+            <meshBasicMaterial map={peopleCarsTexture} />
+          </mesh>
+
           {/* Selected Model */}
           <mesh
             geometry={gltf.nodes[selectedModel.meshKey].geometry}
@@ -223,6 +237,7 @@ export default function Experience(props) {
               showModal={setShowDesignModal}
               content="design"
               option="option1"
+              style={{ zIndex: 1000 }}
             />
           )}
 

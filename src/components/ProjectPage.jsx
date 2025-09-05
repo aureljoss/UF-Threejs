@@ -30,7 +30,7 @@ const contentData = {
       description: "Option 2 blocking description goes here.",
     },
   },
-  design: {
+  "design": {
     option1: {
       title: "Design Option 1",
       images: [
@@ -65,7 +65,7 @@ const contentData = {
       description: "Option 2 design description goes here.",
     },
   },
-  site: {
+  "site": {
     option1: {
       title: "Site",
       images: [

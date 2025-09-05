@@ -101,48 +101,48 @@ export default function CameraPage({ showModal, content, option }) {
 
   return (
     <Html fullscreen>
-        <Container maxWidth="xl" id="project-page-modal">
-          <Box
-            sx={{
-              bgcolor: "rgba(255, 255, 255, 0.4)",
-              borderRadius: "20px",
-              padding: "20px 40px",
-              backdropFilter: "blur(10px)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              border: "white 1px solid",
-              maxHeight: "80vh",
-              overflowY: "auto",
-              position: "relative",
-            }}
+      <Container maxWidth="xl" id="project-page-modal">
+        <Box
+          sx={{
+            bgcolor: "rgba(255, 255, 255, 0.4)",
+            borderRadius: "20px",
+            padding: "20px 40px",
+            backdropFilter: "blur(10px)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            border: "white 1px solid",
+            maxHeight: "80vh",
+            overflowY: "auto",
+            position: "relative",
+          }}
+        >
+          <Fab
+            size="small"
+            style={{ position: "absolute", top: 16, right: 16 }}
+            onClick={() => showModal(false)}
           >
-            <Fab
-              size="small"
-              style={{ position: "absolute", top: 16, right: 16 }}
-              onClick={() => showModal(false)}
-            >
-              <CloseIcon fontSize="small" />
-            </Fab>
-            {section ? (
-              <div style={{ padding: "20px" }}>
-                <h5>{section.title}</h5>
-                {section.images.map((img, idx) => (
-                  <MyImageComponent
-                    key={idx}
-                    path={img.path}
-                    description={img.description}
-                  />
-                ))}
-                {section.description && <p>{section.description}</p>}
-              </div>
-            ) : (
-              <div style={{ padding: "20px 100px" }}>
-                <h5>No content available</h5>
-              </div>
-            )}
-          </Box>
-        </Container>
+            <CloseIcon fontSize="small" />
+          </Fab>
+          {section ? (
+            <div style={{ padding: "20px" }}>
+              <h5>{section.title}</h5>
+              {section.images.map((img, idx) => (
+                <MyImageComponent
+                  key={idx}
+                  path={img.path}
+                  description={img.description}
+                />
+              ))}
+              {section.description && <p>{section.description}</p>}
+            </div>
+          ) : (
+            <div style={{ padding: "20px 100px" }}>
+              <h5>No content available</h5>
+            </div>
+          )}
+        </Box>
+      </Container>
     </Html>
   );
 }
