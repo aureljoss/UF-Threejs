@@ -17,18 +17,18 @@ import ProjectPage from "./ProjectPage";
 
 export default function SimpleContainer(props) {
   const [isShown, setIsShown] = useState(false);
-  const [visibleSection, setVisibleSection] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
-  const [option, setOption] = useState("1");
+  // const [visibleSection, setVisibleSection] = useState(null);
+  // const [openModal, setOpenModal] = useState(false);
+  // const [option, setOption] = useState("1");
 
   const handleClick = () => {
     setIsShown((current) => !current);
-    setVisibleSection(null); // Hide all sections when toggling main panel
+    props.setVisibleSection(null); // Hide all sections when toggling main panel
   };
 
-  const showModal = () => {
-    setOpenModal((current) => !current);
-  };
+  // const showModal = () => {
+  //   setOpenModal((current) => !current);
+  // };
 
   return (
     <React.Fragment>
@@ -73,14 +73,14 @@ export default function SimpleContainer(props) {
                   {/* Site Tab */}
                   <Button
                     variant={
-                      visibleSection === "site" ? "contained" : "outlined"
+                      props.visibleSection === "site" ? "contained" : "outlined"
                     }
                     size="small"
                     onClick={() => {
                       // sectionClick("site");
-                      showModal(false);
-                      setOpenModal(false);
-                      setVisibleSection("site");
+                      // props.showModal(false);
+                      props.setOpenModal(false);
+                      props.setVisibleSection("site");
                     }}
                   >
                     Site
@@ -88,17 +88,17 @@ export default function SimpleContainer(props) {
                   {/* Program Blocking Tab */}
                   <Button
                     variant={
-                      visibleSection === "program blocking"
+                      props.visibleSection === "Program Blocking"
                         ? "contained"
                         : "outlined"
                     }
                     size="small"
                     onClick={() => {
                       // sectionClick("program blocking");
-                      showModal(false);
-                      setOpenModal(false);
-                      setOption("1");
-                      setVisibleSection("program blocking");
+                      // props.setOpen(false);
+                      props.setOpenModal(false);
+                      props.setOption("1");
+                      props.setVisibleSection("Program Blocking");
                       props.tabChange("Program Blocking");
                     }}
                   >
@@ -108,15 +108,15 @@ export default function SimpleContainer(props) {
                   {/* Design Tab */}
                   <Button
                     variant={
-                      visibleSection === "design" ? "contained" : "outlined"
+                      props.visibleSection === "Design" ? "contained" : "outlined"
                     }
                     size="small"
                     onClick={() => {
                       // sectionClick("design");
-                      showModal(false);
-                      setOpenModal(false);
-                      setOption("1");
-                      setVisibleSection("design");
+                      // props.showModal(false);
+                      props.setOpenModal(false);
+                      props.setOption("1");
+                      props.setVisibleSection("Design");
                       props.tabChange("Design");
                     }}
                   >
@@ -125,38 +125,39 @@ export default function SimpleContainer(props) {
                 </Stack>
 
                 {/* Content Section */}
-                {visibleSection === "program blocking" && (
+                {props.visibleSection === "Program Blocking" && (
                   <>
                     <SelectLabels
                       intent="Program Blocking Options"
-                      value={option}
+                      value={props.option}
                       onChange={(selected) => {
-                        setOption(selected);
+                        props.setOption(selected);
                         props.optionChange(selected); // <-- send to parent
                       }}
                     />
                     <div id="program blocking" className="overview">
                       <MyImageComponent
-                        path={option === "1" ? "./images/opt1-blocking.png" : "./images/Opt2-blocking.png"}
-                        description={option === "1" ? "A block and stack for option 1" : "A block and stack for option 2"}
+                        path={props.option === "1" ? "./images/opt1-blocking.png" : "./images/Opt2-blocking.png"}
+                        description={props.option === "1" ? "A block and stack for option 1" : "A block and stack for option 2"}
                       />
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          showModal(true);
+                          props.setOpenModal(true);
                         }}
                       >
-                        Show {openModal ? "Less" : "More"}
+                        Show {props.openModal ? "Less" : "More"}
                       </Button>
                     </div>
                   </>
                 )}
-                {visibleSection === "design" && (
+                {props.visibleSection === "Design" && (
                   <>
-                    <SelectLabels intent="Design Options"           
-                    value={option}
+                    <SelectLabels
+                      intent="Design Options"
+                      value={props.option}
                       onChange={(selected) => {
-                        setOption(selected);
+                        props.setOption(selected);
                         props.optionChange(selected);
                       }}
                     />
@@ -174,16 +175,15 @@ export default function SimpleContainer(props) {
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          showModal(true);
-                          console.log(visibleSection);
+                          props.setOpenModal(true);
                         }}
                       >
-                        Show {openModal ? "Less" : "More"}
+                        Show {props.openModal ? "Less" : "More"}
                       </Button>
                     </div>
                   </>
                 )}
-                {visibleSection === "site" && (
+                {props.visibleSection === "site" && (
                   <>
                     <div id="site" style={{ marginTop: "20px" }}>
                       <MyImageComponent
@@ -194,11 +194,10 @@ export default function SimpleContainer(props) {
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          showModal(true);
-                          console.log(visibleSection);
+                          props.setOpenModal(true);
                         }}
                       >
-                        Show {openModal ? "Less" : "More"}
+                        Show {props.openModal ? "Less" : "More"}
                       </Button>
                     </div>
                   </>
@@ -207,11 +206,11 @@ export default function SimpleContainer(props) {
             )}
           </Box>
         </Container>
-        {openModal && (
+        {props.openModal && (
           <ProjectPage
-            showModal={setOpenModal}
-            content={visibleSection}
-            option={option}
+            setShowModal={props.setOpenModal}
+            content={props.visibleSection}
+            option={props.option}
           />
         )}
       </div>

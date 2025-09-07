@@ -7,7 +7,7 @@ import MyImageComponent from "./ImageContainer";
 
 // Example content data structure
 const contentData = {
-  "program blocking": {
+  "Program Blocking": {
     option1: {
       title: "Blocking Option 1",
       images: [
@@ -30,7 +30,7 @@ const contentData = {
       description: "Option 2 blocking description goes here.",
     },
   },
-  "design": {
+  "Design": {
     option1: {
       title: "Design Option 1",
       images: [
@@ -65,7 +65,7 @@ const contentData = {
       description: "Option 2 design description goes here.",
     },
   },
-  "site": {
+  site: {
     option1: {
       title: "Site",
       images: [
@@ -75,25 +75,35 @@ const contentData = {
       description: "",
     },
   },
+    camera: {
+    option1: {
+      title: "View 1",
+      images: [
+        { path: "/images/opt1-site.png", description: "Site Plan" },
+        { path: "/images/site.png", description: "Site Plan" },
+      ],
+      description: "",
+    },
+  },
 };
 
-export default function ProjectPage({ showModal, content, option }) {
+export default function ProjectPage({ setShowModal, content, option }) {
   // Close modal when clicking outside the modal box
   React.useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest("#project-page-modal")) {
-        showModal(false);
+        setShowModal(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [showModal]);
+  }, [setShowModal]);
 
   // Fallback to option1 if option is not provided
   const selectedOption = `option${option}` || "option1";
   const section = contentData[content] && contentData[content][selectedOption];
 
-    console.log(selectedOption, section);
+  console.log(section, content)
 
   return (
     <Container maxWidth="xl" id="project-page-modal">
@@ -115,7 +125,7 @@ export default function ProjectPage({ showModal, content, option }) {
         <Fab
           size="small"
           style={{ position: "absolute", top: 16, right: 16 }}
-          onClick={() => showModal(false)}
+          onClick={() => sModal(false)}
         >
           <CloseIcon fontSize="small" />
         </Fab>

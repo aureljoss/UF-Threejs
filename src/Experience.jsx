@@ -55,15 +55,15 @@ const designModels = [
     meshKey: "bakedOpt1Massing",
     siteTexture: "./model/site-baked-opt1Massing.jpg",
   },
-  // {
-  //   tab: "Design",
-  //   option: "Option 2",
-  //   label: "Design - Option 2",
-  //   glb: "./model/opt2-massing.glb",
-  //   texture: "./model/opt2-massing.jpg",
-  //   meshKey: "bakedOpt2Massing",
-  // siteTexture: "./model/site-baked-op1-blocking.jpg",
-  // },
+  {
+    tab: "Design",
+    option: "Option 2",
+    label: "Option 2 Massing",
+    glb: "./model/opt2-massing.glb",
+    texture: "./model/opt2-Massing.jpg",
+    meshKey: "bakedOpt2Massing",
+    siteTexture: "./model/site-baked-op1-blocking.jpg",
+  },
 ];
 
 export default function Experience(props) {
@@ -72,19 +72,6 @@ export default function Experience(props) {
     "./model/site-baked-op1-blocking.jpg"
   );
   const [activeOption, setActiveOption] = useState("Option 1");
-
-  // useEffect(() => {
-  //   // Reset to Option 1 when tab changes
-  //   setActiveOption("Option 1");
-  //   if (props.sendTabChange === "Design") {
-  //     setSelectedModel(designModels[0]);
-  //     setSiteModel("./model/site-baked-opt1Massing.jpg");
-  //     setShowDesignCamera(true);
-  //   } else if (props.sendTabChange === "Program Blocking") {
-  //     setSelectedModel(programModels[0]);
-  //     setSiteModel("./model/site-baked-op1-blocking.jpg");
-  //   }
-  // }, [props.sendTabChange]);
 
   useEffect(() => {
     let selected;
@@ -129,7 +116,6 @@ export default function Experience(props) {
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [showDesignCamera, setShowDesignCamera] = useState(false);
   const [showDesignModal, setShowDesignModal] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
 
   // People and Cars
   const { nodes: peopleCarsNodes } = useGLTF("./model/bakedPeopleCars.glb");
@@ -225,21 +211,21 @@ export default function Experience(props) {
               position={[1.7, 0.2, 5.2]}
               distanceFactor={4}
               onClick={() => {
-                setShowDesignModal(true);
-                setOpenModal(true);
-                setShowDesignModal(true);
+                props.setOpenModal(true);
+                props.setVisibleSection("camera");
+                props.setOption('option1')
               }}
             />
           )}
 
-          {showDesignModal && (
+          {/* {showDesignModal && (
             <CameraPage
               showModal={setShowDesignModal}
               content="design"
               option="option1"
               style={{ zIndex: 1000 }}
             />
-          )}
+          )} */}
 
           {/* HTML Markers */}
           <>

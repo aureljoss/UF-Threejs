@@ -19,6 +19,14 @@ const root = ReactDOM.createRoot(document.querySelector("#root"));
 function App() {
   const [visibleSection, setVisibleSection] = useState("Program Blocking");
   const [visibleOption, setVisibleOption] = useState("Option 1");
+  const [openModal, setOpenModal] = useState(false);
+  const [option, setOption] = useState("1");
+
+  // const showModal = (content, option) => {
+  //   setVisibleSection(content);
+  //   setOption(option);
+  //   setOpenModal(true);
+  // };
 
   const tabChange = (dataFromChild) => {
     setVisibleSection(dataFromChild);
@@ -51,12 +59,26 @@ function App() {
             <Experience
               sendTabChange={visibleSection}
               sendOptionChange={visibleOption}
+              // showModal={showModal}
+              setOpenModal={setOpenModal}
+              setVisibleSection={setVisibleSection}
+              setOption={setOption}
             />
           </Suspense>
         </Canvas>
       </div>
       <div className="simple-container">
-        <SimpleContainer tabChange={tabChange} optionChange={optionChange} />
+        <SimpleContainer
+          tabChange={tabChange}
+          optionChange={optionChange}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          option={option}
+          setOption={setOption}
+          // showModal={showModal}
+          setVisibleSection={setVisibleSection}
+          visibleSection={visibleSection}
+        />
       </div>
     </>
   );
