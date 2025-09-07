@@ -90,8 +90,10 @@ export default function ProjectPage({ showModal, content, option }) {
   }, [showModal]);
 
   // Fallback to option1 if option is not provided
-  const selectedOption = option || "option1";
+  const selectedOption = `option${option}` || "option1";
   const section = contentData[content] && contentData[content][selectedOption];
+
+    console.log(selectedOption, section);
 
   return (
     <Container maxWidth="xl" id="project-page-modal">
