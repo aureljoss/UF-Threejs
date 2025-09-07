@@ -213,7 +213,7 @@ export default function Experience(props) {
               onClick={() => {
                 props.setOpenModal(true);
                 props.setVisibleSection("camera");
-                props.setOption('option1')
+                props.setOption('1')
               }}
             />
           )}

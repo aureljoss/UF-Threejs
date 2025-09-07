@@ -65,7 +65,7 @@ const contentData = {
       description: "Option 2 design description goes here.",
     },
   },
-  site: {
+  "site": {
     option1: {
       title: "Site",
       images: [
@@ -75,7 +75,7 @@ const contentData = {
       description: "",
     },
   },
-    camera: {
+    "camera": {
     option1: {
       title: "View 1",
       images: [
@@ -125,7 +125,7 @@ export default function ProjectPage({ setShowModal, content, option }) {
         <Fab
           size="small"
           style={{ position: "absolute", top: 16, right: 16 }}
-          onClick={() => sModal(false)}
+          onClick={() => setModal(false)}
         >
           <CloseIcon fontSize="small" />
         </Fab>

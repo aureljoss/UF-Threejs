@@ -36,6 +36,8 @@ function App() {
     setVisibleOption(selectedOption);
   };
 
+  console.log(option)
+
   return (
     <>
       <div id="canvas-container">
