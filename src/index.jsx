@@ -12,13 +12,11 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import SimpleContainer from "./components/SimpleContainer.jsx";
 import LoaderScreen from "./components/LoaderScreen";
-import { ViewHeadline } from "@mui/icons-material";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
 function App() {
   const [visibleSection, setVisibleSection] = useState("Program Blocking");
-  const [visibleOption, setVisibleOption] = useState("Option 1");
   const [openModal, setOpenModal] = useState(false);
   const [option, setOption] = useState("1");
 
@@ -32,11 +30,9 @@ function App() {
     setVisibleSection(dataFromChild);
   };
 
-  const optionChange = (selectedOption) => {
-    setVisibleOption(selectedOption);
+  const optionChange = (option) => {
+    setOption(option);
   };
-
-  console.log(option)
 
   return (
     <>
@@ -49,18 +45,10 @@ function App() {
             position: [-10, 10, 30],
           }}
         >
-          {/* <EffectComposer>
-            <DepthOfField
-              focusDistance={0.015}
-              focalLength={0.05}
-              bokehScale={2}
-              height={480}
-            />
-          </EffectComposer> */}
           <Suspense fallback={<LoaderScreen />}>
             <Experience
-              sendTabChange={visibleSection}
-              sendOptionChange={visibleOption}
+              visibleSection={visibleSection}
+              option={option}
               // showModal={showModal}
               setOpenModal={setOpenModal}
               setVisibleSection={setVisibleSection}
@@ -70,7 +58,7 @@ function App() {
         </Canvas>
       </div>
       <div className="simple-container">
-        <SimpleContainer
+        <SimpleContainer 
           tabChange={tabChange}
           optionChange={optionChange}
           openModal={openModal}

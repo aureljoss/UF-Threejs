@@ -183,6 +183,38 @@ export default function SimpleContainer(props) {
                     </div>
                   </>
                 )}
+                {props.visibleSection === "camera" && (
+                  <>
+                    <SelectLabels
+                      intent="Design Options"
+                      value={props.option}
+                      onChange={(selected) => {
+                        props.setOption(selected);
+                        props.optionChange(selected);
+                      }}
+                    />
+                    <div id="design">
+                      <MyImageComponent
+                        path="./images/opt1-massing.png"
+                        description="A block and stack for option 1"
+                      />
+                      <p>
+                        {" "}
+                        This approach breaks down the building’s overall scale,
+                        creating a more human-centered experience that fosters
+                        comfort, connection, and engagement.
+                      </p>
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          props.setOpenModal(true);
+                        }}
+                      >
+                        Show {props.openModal ? "Less" : "More"}
+                      </Button>
+                    </div>
+                  </>
+                )}
                 {props.visibleSection === "site" && (
                   <>
                     <div id="site" style={{ marginTop: "20px" }}>

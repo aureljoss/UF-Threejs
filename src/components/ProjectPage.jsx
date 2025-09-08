@@ -23,7 +23,7 @@ const contentData = {
       title: "Blocking Option 2",
       images: [
         {
-          path: "/images/opt2-blocking.png",
+          path: "/images/Opt2-blocking.png",
           description: "A block and stack for option 2",
         },
       ],
@@ -77,10 +77,9 @@ const contentData = {
   },
     "camera": {
     option1: {
-      title: "View 1",
+      title: "Option 1 - View from Archer Rd",
       images: [
-        { path: "/images/opt1-site.png", description: "Site Plan" },
-        { path: "/images/site.png", description: "Site Plan" },
+        { path: "/images/op1-c02 EDITS.jpg", description: "View from Archer Rd" },
       ],
       description: "",
     },
@@ -102,8 +101,6 @@ export default function ProjectPage({ setShowModal, content, option }) {
   // Fallback to option1 if option is not provided
   const selectedOption = `option${option}` || "option1";
   const section = contentData[content] && contentData[content][selectedOption];
-
-  console.log(section, content)
 
   return (
     <Container maxWidth="xl" id="project-page-modal">

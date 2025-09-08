@@ -34,15 +34,15 @@ const programModels = [
     meshKey: "bakedOpt2Blocking",
     siteTexture: "./model/site-baked-opt2-blocking.jpg",
   },
-  {
-    tab: "Program Blocking",
-    option: "Option 3",
-    label: "Option 3 Blocking",
-    glb: "./model/opt2-blocking.glb",
-    texture: "./model/opt2-blocking.jpg",
-    meshKey: "bakedOpt2Blocking",
-    siteTexture: "./model/site-baked-op1-blocking.jpg",
-  },
+  // {
+  //   tab: "Program Blocking",
+  //   option: "Option 3",
+  //   label: "Option 3 Blocking",
+  //   glb: "./model/opt2-blocking.glb",
+  //   texture: "./model/opt2-blocking.jpg",
+  //   meshKey: "bakedOpt2Blocking",
+  //   siteTexture: "./model/site-baked-op1-blocking.jpg",
+  // },
 ];
 
 const designModels = [
@@ -62,7 +62,7 @@ const designModels = [
     glb: "./model/opt2-massing.glb",
     texture: "./model/opt2-Massing.jpg",
     meshKey: "bakedOpt2Massing",
-    siteTexture: "./model/site-baked-op1-blocking.jpg",
+    siteTexture: "./model/site-baked-opt2-massing.jpg",
   },
 ];
 
@@ -71,28 +71,26 @@ export default function Experience(props) {
   const [siteModel, setSiteModel] = useState(
     "./model/site-baked-op1-blocking.jpg"
   );
-  const [activeOption, setActiveOption] = useState("Option 1");
-
   useEffect(() => {
     let selected;
-    if (props.sendTabChange === "Design") {
+    if (props.visibleSection === "Design") {
       selected = designModels.find(
-        (m) => m.option === `Option ${props.sendOptionChange}`
+        (m) => m.option === `Option ${props.option}`
       );
       if (!selected) selected = designModels[0]; // fallback
       setSelectedModel(selected);
       setSiteModel("./model/site-baked-opt1Massing.jpg");
       setShowDesignCamera(true);
-    } else if (props.sendTabChange === "Program Blocking") {
+    } else if (props.visibleSection === "Program Blocking") {
       selected = programModels.find(
-        (m) => m.option === `Option ${props.sendOptionChange}`
+        (m) => m.option === `Option ${props.option}`
       );
       if (!selected) selected = programModels[0]; // fallback
       setSelectedModel(selected);
       setSiteModel("./model/site-baked-op1-blocking.jpg");
       setShowDesignCamera(false);
     }
-  }, [props.sendTabChange, props.sendOptionChange]);
+  }, [props.visibleSection, props.option]);
 
   const gltf = useGLTF(selectedModel.glb);
   const texture = useTexture(selectedModel.texture);
@@ -202,30 +200,36 @@ export default function Experience(props) {
           <LocationMarker
             position={[7.4, 0.4, 0.2]}
             distanceFactor={4}
-            onClick={() => setShowProjectModal(true)}
           />
 
           {/* Camera Marker OPTION 1*/}
-          {showDesignCamera === true && props.sendTabChange === "Design" && (
-            <CameraMarker
-              position={[1.7, 0.2, 5.2]}
-              distanceFactor={4}
-              onClick={() => {
-                props.setOpenModal(true);
-                props.setVisibleSection("camera");
-                props.setOption('1')
-              }}
-            />
-          )}
+          {showDesignCamera === true &&
+            props.visibleSection === "Design" &&
+            props.option === "1" && (
+              <CameraMarker
+                position={[1.7, 0.2, 5.2]}
+                distanceFactor={4}
+                onClick={() => {
+                  props.setOpenModal(true);
+                  props.setVisibleSection("camera");
+                  props.setOption("1");
+                }}
+              />
+            )}
 
-          {/* {showDesignModal && (
-            <CameraPage
-              showModal={setShowDesignModal}
-              content="design"
-              option="option1"
-              style={{ zIndex: 1000 }}
-            />
-          )} */}
+          {showDesignCamera === true &&
+            props.visibleSection === "camera" &&
+            props.option === "1" && (
+              <CameraMarker
+                position={[1.7, 0.2, 5.2]}
+                distanceFactor={4}
+                onClick={() => {
+                  props.setOpenModal(true);
+                  props.setVisibleSection("camera");
+                  props.setOption("1");
+                }}
+              />
+            )}
 
           {/* HTML Markers */}
           <>
@@ -281,54 +285,6 @@ export default function Experience(props) {
         </group>
       </Center>
       {/* </ScrollControls> */}
-
-      {showProjectModal && (
-        <Html fullscreen>
-          <div
-            style={{
-              position: "fixed",
-              top: "10%",
-              left: "50%",
-              transform: "translate(0%, -90%)",
-              background: "rgba(255, 255, 255, 0.3",
-              backgroundFilter: "blur(10px) saturate(180%)",
-              border: "1px solid rgba(255,255,255,0.8)",
-              padding: "2rem",
-              borderRadius: "2rem",
-              boxShadow:
-                "0 8px 32px rgba(31, 38, 135, 0.2),inset 0 4px 20px rgba(255, 255, 255, 0.3)",
-              zIndex: 1000,
-              minWidth: "400px",
-              color: "rgba(0, 0, 0, 0.9)",
-            }}
-          >
-            <button
-              onClick={() => setShowProjectModal(false)}
-              style={{
-                position: "absolute",
-                top: "1rem",
-                right: "1rem",
-                background: "none",
-                border: "none",
-                fontSize: "1.5rem",
-                cursor: "pointer",
-                color: "black",
-                zIndex: 1001,
-              }}
-              aria-label="Close"
-            >
-              &#10005;
-            </button>
-            <h3>UF Health Shands Hospital</h3>
-            <p>
-              UF Health represents the commitment of more than 30,000 faculty
-              and staff to reach higher and farther. Together we translate
-              scientific discoveries into patient care advances that help people
-              get back to living their best possible life.
-            </p>
-          </div>
-        </Html>
-      )}
     </>
   );
 }
