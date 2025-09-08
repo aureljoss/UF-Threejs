@@ -11,8 +11,8 @@ import { DoubleSide } from "three";
 import HtmlText from "./components/HtmlText";
 import LocationMarker from "./components/LocationMarker";
 import CameraMarker from "./components/CameraMarker";
-import CameraPage from "./components/CameraPage";
 import MyImageComponent from "./components/ImageContainer";
+import { useThree, useFrame } from "@react-three/fiber";
 
 //Important glb models
 const programModels = [
@@ -67,6 +67,8 @@ const designModels = [
 ];
 
 export default function Experience(props) {
+  const [cameraTargetPosition, setCameraTargetPosition] = useState(null);
+  const [orbitEnabled, setOrbitEnabled] = useState(true);
   const [selectedModel, setSelectedModel] = useState(programModels[0]);
   const [siteModel, setSiteModel] = useState(
     "./model/site-baked-op1-blocking.jpg"
@@ -91,6 +93,37 @@ export default function Experience(props) {
       setShowDesignCamera(false);
     }
   }, [props.visibleSection, props.option]);
+
+  // Updates Camera position when LocationMarker is clicked
+  const { camera } = useThree();
+
+  useFrame(() => {
+    if (cameraTargetPosition) {
+      // Target position for camera (customize offset as needed)
+      const target = {
+        x: cameraTargetPosition[0],
+        y: cameraTargetPosition[1],
+        z: cameraTargetPosition[2],
+      };
+
+      // Smoothly interpolate camera position
+      camera.position.lerp(target, 0.08);
+      // setOrbitEnabled(false); // Disable OrbitControls during animation
+
+      // Look at the origin
+      // camera.lookAt(0,0,0);
+
+      // If camera is close enough to target, stop animating
+      const dist = camera.position.distanceTo(target);
+      if (dist < 0.001) {
+        // Snap to target and stop animating
+        camera.position.set(target.x, target.y, target.z);
+        // camera.lookAt(...cameraTargetPosition);
+        setCameraTargetPosition(null); //
+        // setOrbitEnabled(true); // Re-enable OrbitControls after animation
+      }
+    }
+  });
 
   const gltf = useGLTF(selectedModel.glb);
   const texture = useTexture(selectedModel.texture);
@@ -129,14 +162,15 @@ export default function Experience(props) {
       <color args={["#d3e5f8"]} attach="background" />
       <OrbitControls
         makeDefault
+        enabled={orbitEnabled}
         autoRotateSpeed={-0.1}
         zoomSpeed={2}
         enableZoom={true}
         minDistance={2}
         maxDistance={3000000}
         dampingFactor={0.05}
-        minPolarAngle={Math.PI / 3}
-        maxPolarAngle={Math.PI / 2}
+        minPolarAngle={Math.PI / 5}
+        maxPolarAngle={Math.PI / 2.1}
       />
       <CameraShake
         maxYaw={0.001}
@@ -184,7 +218,7 @@ export default function Experience(props) {
             position={[0, 0, 0]}
             scale={[0.01, 0.01, 0.01]}
           >
-            <meshBasicMaterial map={peopleCarsTexture} />
+            <meshBasicMaterial map={peopleCarsTexture} side={DoubleSide} />
           </mesh>
 
           {/* Selected Model */}
@@ -198,8 +232,21 @@ export default function Experience(props) {
 
           {/* Location Marker */}
           <LocationMarker
-            position={[7.4, 0.4, 0.2]}
+            position={[5.8, 0.4, 4.3]}
             distanceFactor={4}
+            onClick={() => setCameraTargetPosition([6, 3, 4.3])}
+          />
+
+          <LocationMarker
+            position={[-2.6, 0.4, 6.8]}
+            distanceFactor={4}
+            onClick={() => setCameraTargetPosition([-2.6, 3, 6.8])}
+          />
+
+          <LocationMarker
+            position={[-2.6, 0.4, -0.6]}
+            distanceFactor={4}
+            onClick={() => setCameraTargetPosition([-3.8, 1.8, -2])}
           />
 
           {/* Camera Marker OPTION 1*/}

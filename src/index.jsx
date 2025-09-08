@@ -40,9 +40,9 @@ function App() {
         <Canvas
           flat
           camera={{
-            fov: 35,
+            fov: 50,
             near: 0.01,
-            position: [-10, 10, 30],
+            position: [-6, 8, 15],
           }}
         >
           <Suspense fallback={<LoaderScreen />}>

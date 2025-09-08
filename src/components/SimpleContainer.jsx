@@ -9,26 +9,17 @@ import Fab from "@mui/material/Fab";
 import Grid from "@mui/system/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import CloseIcon from "@mui/icons-material/Close";
 import SelectLabels from "./SelectLabels";
 import MyImageComponent from "./ImageContainer";
-import ProjectModal from "./ProjectModal";
 import ProjectPage from "./ProjectPage";
 
 export default function SimpleContainer(props) {
   const [isShown, setIsShown] = useState(false);
-  // const [visibleSection, setVisibleSection] = useState(null);
-  // const [openModal, setOpenModal] = useState(false);
-  // const [option, setOption] = useState("1");
 
   const handleClick = () => {
     setIsShown((current) => !current);
     props.setVisibleSection(null); // Hide all sections when toggling main panel
   };
-
-  // const showModal = () => {
-  //   setOpenModal((current) => !current);
-  // };
 
   return (
     <React.Fragment>
