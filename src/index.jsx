@@ -34,6 +34,8 @@ function App() {
     setOption(option);
   };
 
+  console.log( visibleSection, option);
+
   return (
     <>
       <div id="canvas-container">

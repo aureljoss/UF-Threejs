@@ -17,7 +17,7 @@ const contentData = {
         },
       ],
       description:
-        "The Terrace is envisioned as a welcoming gateway on the west side of the existing Dental Science Complex. The concept centers on the ecology of learning and site, weaving together program and environment into a thoughtful composition of interconnected masses. This approach breaks down the building’s overall scale, creating a more human-centered experience that fosters comfort, connection, and engagement.",
+        "Option 1 is envisioned as a welcoming gateway on the west side of the existing Dental Science Complex. \n The concept centers on the ecology of learning and site, weaving together program and environment into a thoughtful composition of interconnected masses. This approach breaks down the building’s overall scale, creating a more human-centered experience that fosters comfort, connection, and engagement.",
     },
     option2: {
       title: "Blocking Option 2",
@@ -30,7 +30,7 @@ const contentData = {
       description: "Option 2 blocking description goes here.",
     },
   },
-  "Design": {
+  Design: {
     option1: {
       title: "Design Option 1",
       images: [
@@ -52,7 +52,7 @@ const contentData = {
         },
       ],
       description:
-        "This approach breaks down the building’s overall scale, creating a more human-centered experience that fosters comfort, connection, and engagement.",
+        "Option 1 breaks down the building’s overall scale, creating a more human-centered experience that fosters comfort, connection, and engagement.",
     },
     option2: {
       title: "Design Option 2",
@@ -61,11 +61,21 @@ const contentData = {
           path: "/images/opt2-massing.png",
           description: "A block and stack for option 2",
         },
+        {
+          path: "/images/opt2-design.png",
+          description: "Exterior Rendering",
+        },
+        {
+          path: "/images/opt2-arial.png",
+          description: "Exterior Rendering",
+        },
       ],
-      description: "Option 2 design description goes here.",
+      description: [
+        "Option 2 engages the site and users through a grand front door and promenave that signals the scale and prominence of the program and activities. \n A single complex interior space called the forum brings all learners, researchers, and teachers to an organizing center that creates identities to all programs and uses. \n The canopy creates a formal entry portico while also shading the south side of the building to enable more transparency.  ",
+      ],
     },
   },
-  "site": {
+  site: {
     option1: {
       title: "Site",
       images: [
@@ -75,11 +85,24 @@ const contentData = {
       description: "",
     },
   },
-    "camera": {
+  camera: {
     option1: {
       title: "Option 1 - View from Archer Rd",
       images: [
-        { path: "/images/op1-c02 EDITS.jpg", description: "View from Archer Rd" },
+        {
+          path: "/images/op1-c02 EDITS.jpg",
+          description: "View from Archer Rd",
+        },
+      ],
+      description: "",
+    },
+    option2: {
+      title: "Option 2 - View from Archer Rd",
+      images: [
+        {
+          path: "/images/opt2-design.png",
+          description: "View from Archer Rd",
+        },
       ],
       description: "",
     },
@@ -90,7 +113,10 @@ export default function ProjectPage({ setShowModal, content, option }) {
   // Close modal when clicking outside the modal box
   React.useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!event.target.closest("#project-page-modal")) {
+      if (
+        !event.target.closest("#project-page-modal") &&
+        !event.target.closest("#simple-container")
+      ) {
         setShowModal(false);
       }
     };
@@ -122,7 +148,7 @@ export default function ProjectPage({ setShowModal, content, option }) {
         <Fab
           size="small"
           style={{ position: "absolute", top: 16, right: 16 }}
-          onClick={() => setModal(false)}
+          onClick={() => setShowModal(false)}
         >
           <CloseIcon fontSize="small" />
         </Fab>
@@ -136,7 +162,9 @@ export default function ProjectPage({ setShowModal, content, option }) {
                 description={img.description}
               />
             ))}
-            {section.description && <p>{section.description}</p>}
+            {section.description && (
+              <p style={{ whiteSpace: "pre-line" }}>{section.description}</p>
+            )}
           </div>
         ) : (
           <div style={{ padding: "20px 100px" }}>

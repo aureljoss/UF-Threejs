@@ -30,7 +30,7 @@ export default function SimpleContainer(props) {
           alignItems: "flex-start",
         }}
       >
-        <Container maxWidth="xs">
+        <Container maxWidth="xs" id="simple-container">
           <Box
             sx={{
               bgcolor: "rgba(255, 255, 255, 0.4)",
@@ -134,7 +134,7 @@ export default function SimpleContainer(props) {
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          props.setOpenModal(true);
+                          props.setOpenModal(!props.openModal);
                         }}
                       >
                         Show {props.openModal ? "Less" : "More"}
@@ -154,19 +154,13 @@ export default function SimpleContainer(props) {
                     />
                     <div id="design">
                       <MyImageComponent
-                        path="./images/opt1-massing.png"
-                        description="A block and stack for option 1"
+                        path={props.option === "1" ? "./images/opt1-massing.png" : "./images/opt2-massing.png"}
+                        description={props.option === "1" ? "Design for option 1" : "Design for option 2"}
                       />
-                      <p>
-                        {" "}
-                        This approach breaks down the building’s overall scale,
-                        creating a more human-centered experience that fosters
-                        comfort, connection, and engagement.
-                      </p>
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          props.setOpenModal(true);
+                          props.setOpenModal(!props.openModal);
                         }}
                       >
                         Show {props.openModal ? "Less" : "More"}
@@ -186,8 +180,8 @@ export default function SimpleContainer(props) {
                     />
                     <div id="design">
                       <MyImageComponent
-                        path="./images/opt1-massing.png"
-                        description="A block and stack for option 1"
+                        path={props.option === "1" ? "./images/opt1-massing.png" : "./images/opt2-massing.png"}
+                        description={props.option === "1" ? "Design for option 1" : "Design for option 2"}
                       />
                       <p>
                         {" "}

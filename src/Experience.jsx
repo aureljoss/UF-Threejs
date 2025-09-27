@@ -144,18 +144,18 @@ export default function Experience(props) {
   const treesTexture = useTexture("./model/trees-baked.jpg");
   treesTexture.flipY = false;
 
-  const [showProjectModal, setShowProjectModal] = useState(false);
+  // const [showProjectModal, setShowProjectModal] = useState(false);
   const [showDesignCamera, setShowDesignCamera] = useState(false);
-  const [showDesignModal, setShowDesignModal] = useState(false);
+  // const [showDesignModal, setShowDesignModal] = useState(false);
 
   // People and Cars
   const { nodes: peopleCarsNodes } = useGLTF("./model/bakedPeopleCars.glb");
   const peopleCarsTexture = useTexture("./model/bakedPeopleCars.jpg");
   peopleCarsTexture.flipY = false;
 
-  const showModal = () => {
-    setShowDesignModal((current) => !current);
-  };
+  // const showModal = () => {
+  //   setShowDesignModal((current) => !current);
+  // };
 
   return (
     <>
@@ -274,6 +274,35 @@ export default function Experience(props) {
                   props.setOpenModal(true);
                   props.setVisibleSection("camera");
                   props.setOption("1");
+                }}
+              />
+            )}
+
+          {/* Camera Marker OPTION 2*/}
+          {showDesignCamera === true &&
+            props.visibleSection === "Design" &&
+            props.option === "2" && (
+              <CameraMarker
+                position={[-0.1, 0.2, 5.5]}
+                distanceFactor={4}
+                onClick={() => {
+                  props.setOpenModal(true);
+                  props.setVisibleSection("camera");
+                  props.setOption("2");
+                }}
+              />
+            )}
+
+          {showDesignCamera === true &&
+            props.visibleSection === "camera" &&
+            props.option === "2" && (
+              <CameraMarker
+                position={[-0.1, 0.2, 5.5]}
+                distanceFactor={4}
+                onClick={() => {
+                  props.setOpenModal(true);
+                  props.setVisibleSection("camera");
+                  props.setOption("2");
                 }}
               />
             )}
