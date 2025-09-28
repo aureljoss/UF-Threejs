@@ -70,19 +70,19 @@ const contentData = {
           description: "Exterior Rendering",
         },
       ],
-      description: [
+      description:
         "Option 2 engages the site and users through a grand front door and promenave that signals the scale and prominence of the program and activities. \n A single complex interior space called the forum brings all learners, researchers, and teachers to an organizing center that creates identities to all programs and uses. \n The canopy creates a formal entry portico while also shading the south side of the building to enable more transparency.  ",
-      ],
     },
   },
   site: {
     option1: {
       title: "Site",
       images: [
-        { path: "/images/opt1-site.png", description: "Site Plan" },
         { path: "/images/site.png", description: "Site Plan" },
+        { path: "/images/opt1-site.png", description: "Site Plan" },
       ],
-      description: "",
+      description:
+        "The proposed development introduces a new addition to the west of the existing building, establishing a clear emphasis on expansion while maintaining harmony with its surroundings. This addition is thoughtfully integrated into the broader urban context, responding to the scale and rhythm of the area, creating a dynamic yet cohesive streetscape. \n The main entry is strategically positioned along Center Drive, offering a prominent and accessible point of arrival. Along Archer, the design incorporates buffering elements and continuity strategies to ensure a seamless transition between new and existing structures, preserving the visual and spatial integrity of the corridor. \n Careful attention is given to major view sheds and long-distance perspectives, enhancing the site's visibility and reinforcing its presence within the landscape. Parking and arrival zones are designed to facilitate smooth connections to the existing health science complex, ensuring functional integration and ease of movement for visitors and staff alike. Careful attention is given to major view sheds and long-distance perspectives, enhancing the site's visibility and reinforcing its presence within the landscape. Parking and arrival zones are designed to facilitate smooth connections to the existing health science complex, ensuring functional integration and ease of movement for visitors and staff alike.",
     },
   },
   camera: {

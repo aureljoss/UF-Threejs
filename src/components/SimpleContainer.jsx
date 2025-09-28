@@ -207,7 +207,7 @@ export default function SimpleContainer(props) {
                         path="./images/site.png"
                         description="A block and stack for option 1"
                       />
-                      <p> Blah blah blah - cool site - blah blah blah</p>
+                      {/* <p> Blah blah blah - cool site - blah blah blah</p> */}
                       <Button
                         variant="outlined"
                         onClick={() => {

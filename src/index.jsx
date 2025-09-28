@@ -12,6 +12,8 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import SimpleContainer from "./components/SimpleContainer.jsx";
 import LoaderScreen from "./components/LoaderScreen";
+import LoginButton from "./components/LoginButton.jsx";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
@@ -34,10 +36,11 @@ function App() {
     setOption(option);
   };
 
-  console.log( visibleSection, option);
+  console.log(visibleSection, option);
 
   return (
     <>
+      <LoginButton />
       <div id="canvas-container">
         <Canvas
           flat
@@ -60,7 +63,7 @@ function App() {
         </Canvas>
       </div>
       <div className="simple-container">
-        <SimpleContainer 
+        <SimpleContainer
           tabChange={tabChange}
           optionChange={optionChange}
           openModal={openModal}
@@ -76,4 +79,14 @@ function App() {
   );
 }
 
-root.render(<App />);
+root.render(
+  <Auth0Provider
+    domain="dev-ytfzxy03jl6z81rl.us.auth0.com"
+    clientId="Bk2ejfuM7KtdvgHbcVAwvEPQ26sn5W8X"
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+    }}
+  >
+    <App />
+  </Auth0Provider>
+);
