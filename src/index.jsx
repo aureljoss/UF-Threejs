@@ -13,7 +13,7 @@ import "@fontsource/roboto/700.css";
 import SimpleContainer from "./components/SimpleContainer.jsx";
 import LoaderScreen from "./components/LoaderScreen";
 import LoginButton from "./components/LoginButton.jsx";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
@@ -21,6 +21,11 @@ function App() {
   const [visibleSection, setVisibleSection] = useState("Program Blocking");
   const [openModal, setOpenModal] = useState(false);
   const [option, setOption] = useState("1");
+
+
+  // Auth0 Authentication
+  const AppWrapper = () => {
+  const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
 
   // const showModal = (content, option) => {
   //   setVisibleSection(content);
@@ -87,6 +92,12 @@ root.render(
       redirect_uri: window.location.origin,
     }}
   >
-    <App />
-  </Auth0Provider>
+      if (!isAuthenticated) {
+    // Redirect to Auth0 Universal Login if not authenticated
+    loginWithRedirect();
+    return null; // Or a loading component
+  } else {
+    return <App />;
+  }
+    </Auth0Provider>
 );

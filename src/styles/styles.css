@@ -55,9 +55,9 @@ p {
     display: flex;
     justify-content:space-between;
     align-items: center;
-    width:90vw;
+    width:96vw;
     height: 10vh;
-    margin: auto 5vw auto 24px;
+    margin: auto 24px;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
