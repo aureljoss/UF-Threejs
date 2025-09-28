@@ -6,7 +6,7 @@ import {
   Center,
   Html,
 } from "@react-three/drei";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DoubleSide } from "three";
 import HtmlText from "./components/HtmlText";
 import LocationMarker from "./components/LocationMarker";
@@ -73,6 +73,8 @@ export default function Experience(props) {
   const [siteModel, setSiteModel] = useState(
     "./model/site-baked-op1-blocking.jpg"
   );
+  const orbitRef = useRef();
+
   useEffect(() => {
     let selected;
     if (props.visibleSection === "Design") {
@@ -113,15 +115,15 @@ export default function Experience(props) {
       // Look at the origin
       // camera.lookAt(0,0,0);
 
-      // If camera is close enough to target, stop animating
-      const dist = camera.position.distanceTo(target);
-      if (dist < 0.001) {
-        // Snap to target and stop animating
-        camera.position.set(target.x, target.y, target.z);
-        // camera.lookAt(...cameraTargetPosition);
-        setCameraTargetPosition(null); //
-        // setOrbitEnabled(true); // Re-enable OrbitControls after animation
-      }
+      // // If camera is close enough to target, stop animating
+      // const dist = camera.position.distanceTo(target);
+      // if (dist < 0.1) {
+      //   // Snap to target and stop animating
+      //   camera.position.set(target.x, target.y, target.z);
+      //   // camera.lookAt(...cameraTargetPosition);
+      //   setCameraTargetPosition(null); //
+      //   // setOrbitEnabled(true); // Re-enable OrbitControls after animation
+      // }
     }
   });
 
@@ -157,10 +159,29 @@ export default function Experience(props) {
   //   setShowDesignModal((current) => !current);
   // };
 
+
+  // Stop camera animation if user interacts with OrbitControls after clicking on the Camera Markers
+  useEffect(() => {
+    const controls = orbitRef.current;
+    if (!controls) return;
+
+    const stopCameraAnimation = () => {
+      setCameraTargetPosition(null);
+      setOrbitEnabled(true);
+    };
+
+    controls.addEventListener("start", stopCameraAnimation);
+
+    return () => {
+      controls.removeEventListener("start", stopCameraAnimation);
+    };
+  }, []);
+
   return (
     <>
       <color args={["#d3e5f8"]} attach="background" />
       <OrbitControls
+        ref={orbitRef}
         makeDefault
         enabled={orbitEnabled}
         autoRotateSpeed={-0.1}

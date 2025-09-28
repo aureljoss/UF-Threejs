@@ -43,7 +43,6 @@ h5 {
 
 h6 {
   font-size: 20px;
-  line-height: 1.7em;
 }
 
 p {
@@ -57,7 +56,8 @@ p {
     justify-content:space-between;
     align-items: center;
     width:90vw;
-    margin: auto 5vw;
+    height: 10vh;
+    margin: auto 5vw auto 2vw;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -118,6 +118,12 @@ a{
 .scroll-button--up{
   transform: rotate(180deg);
 }
+
+#logo{
+  height: 100px;
+  width: auto;
+}
+
 
 /*MUI SECTION */
 .MuiFormControl-root{
