@@ -75,6 +75,9 @@ export default function Experience(props) {
   );
   const orbitRef = useRef();
 
+  console.log(props.visibleSection, props.option);
+  
+
   useEffect(() => {
     let selected;
     if (props.visibleSection === "Design") {

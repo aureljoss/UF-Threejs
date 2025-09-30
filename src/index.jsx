@@ -12,7 +12,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import SimpleContainer from "./components/SimpleContainer.jsx";
 import LoaderScreen from "./components/LoaderScreen";
-// import LoginButton from "./components/LoginButton.jsx";
+import LogoutButton from "./components/LogoutButton.jsx";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
@@ -22,19 +22,6 @@ function App() {
   const [openModal, setOpenModal] = useState(false);
   const [option, setOption] = useState("1");
 
-  // Auth0 Authentication
-    // const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
-
-  //   React.useEffect(() => {
-  //     if (!isLoading && !isAuthenticated) {
-  //       loginWithRedirect();
-  //     }
-  //   }, [isLoading, isAuthenticated, loginWithRedirect]);
-
-  //   if (isLoading || !isAuthenticated) {
-  //     return null; // Or a loading component
-  //   }
-
     const tabChange = (dataFromChild) => {
       setVisibleSection(dataFromChild);
     };
@@ -43,11 +30,10 @@ function App() {
       setOption(option);
     };
 
-    console.log(visibleSection, option);
-
     return (
       <>
         {/* <LoginButton /> */}
+        <LogoutButton/>
         <div id="canvas-container">
           <Canvas
             flat
