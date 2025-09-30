@@ -12,7 +12,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import SimpleContainer from "./components/SimpleContainer.jsx";
 import LoaderScreen from "./components/LoaderScreen";
-import LoginButton from "./components/LoginButton.jsx";
+// import LoginButton from "./components/LoginButton.jsx";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
@@ -22,66 +22,81 @@ function App() {
   const [openModal, setOpenModal] = useState(false);
   const [option, setOption] = useState("1");
 
-
   // Auth0 Authentication
-  const AppWrapper = () => {
-  const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+    // const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
-  // const showModal = (content, option) => {
-  //   setVisibleSection(content);
-  //   setOption(option);
-  //   setOpenModal(true);
-  // };
+  //   React.useEffect(() => {
+  //     if (!isLoading && !isAuthenticated) {
+  //       loginWithRedirect();
+  //     }
+  //   }, [isLoading, isAuthenticated, loginWithRedirect]);
 
-  const tabChange = (dataFromChild) => {
-    setVisibleSection(dataFromChild);
+  //   if (isLoading || !isAuthenticated) {
+  //     return null; // Or a loading component
+  //   }
+
+    const tabChange = (dataFromChild) => {
+      setVisibleSection(dataFromChild);
+    };
+
+    const optionChange = (option) => {
+      setOption(option);
+    };
+
+    console.log(visibleSection, option);
+
+    return (
+      <>
+        {/* <LoginButton /> */}
+        <div id="canvas-container">
+          <Canvas
+            flat
+            camera={{
+              fov: 50,
+              near: 0.01,
+              position: [-6, 8, 15],
+            }}
+          >
+            <Suspense fallback={<LoaderScreen />}>
+              <Experience
+                visibleSection={visibleSection}
+                option={option}
+                // showModal={showModal}
+                setOpenModal={setOpenModal}
+                setVisibleSection={setVisibleSection}
+                setOption={setOption}
+              />
+            </Suspense>
+          </Canvas>
+        </div>
+        <div className="simple-container">
+          <SimpleContainer
+            tabChange={tabChange}
+            optionChange={optionChange}
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            option={option}
+            setOption={setOption}
+            // showModal={showModal}
+            setVisibleSection={setVisibleSection}
+            visibleSection={visibleSection}
+          />
+        </div>
+      </>
+    );
   };
 
-  const optionChange = (option) => {
-    setOption(option);
-  };
 
-  console.log(visibleSection, option);
+function AuthWrapper() {
+  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
-  return (
-    <>
-      <LoginButton />
-      <div id="canvas-container">
-        <Canvas
-          flat
-          camera={{
-            fov: 50,
-            near: 0.01,
-            position: [-6, 8, 15],
-          }}
-        >
-          <Suspense fallback={<LoaderScreen />}>
-            <Experience
-              visibleSection={visibleSection}
-              option={option}
-              // showModal={showModal}
-              setOpenModal={setOpenModal}
-              setVisibleSection={setVisibleSection}
-              setOption={setOption}
-            />
-          </Suspense>
-        </Canvas>
-      </div>
-      <div className="simple-container">
-        <SimpleContainer
-          tabChange={tabChange}
-          optionChange={optionChange}
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-          option={option}
-          setOption={setOption}
-          // showModal={showModal}
-          setVisibleSection={setVisibleSection}
-          visibleSection={visibleSection}
-        />
-      </div>
-    </>
-  );
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    }
+  }, [isLoading, isAuthenticated]);
+
+  return <App />;
 }
 
 root.render(
@@ -92,12 +107,6 @@ root.render(
       redirect_uri: window.location.origin,
     }}
   >
-      if (!isAuthenticated) {
-    // Redirect to Auth0 Universal Login if not authenticated
-    loginWithRedirect();
-    return null; // Or a loading component
-  } else {
-    return <App />;
-  }
-    </Auth0Provider>
+    <AuthWrapper />
+  </Auth0Provider>
 );

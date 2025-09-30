@@ -193,7 +193,7 @@ export default function Experience(props) {
         minPolarAngle={Math.PI / 5}
         maxPolarAngle={Math.PI / 2.1}
       />
-      <CameraShake
+      {/* <CameraShake
         maxYaw={0.001}
         maxPitch={0.001}
         maxRoll={0.01}
@@ -202,7 +202,7 @@ export default function Experience(props) {
         rollFrequency={0.8}
         intensity={1.0}
         decayRate={0.8}
-      />
+      /> */}
 
       <Center>
         <group>
