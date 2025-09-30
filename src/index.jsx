@@ -96,6 +96,11 @@ function AuthWrapper() {
     }
   }, [isLoading, isAuthenticated]);
 
+   if (isLoading || !isAuthenticated) {
+    // Optionally show a loading spinner here
+    return null;
+  }
+
   return <App />;
 }
 
