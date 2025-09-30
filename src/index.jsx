@@ -91,15 +91,15 @@ function AuthWrapper() {
   const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
   React.useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isLoading && !isAuthenticated) {
       loginWithRedirect();
     }
-  }, [isLoading, isAuthenticated]);
+  }, [isLoading, isAuthenticated, loginWithRedirect]);
 
-   if (isLoading || !isAuthenticated) {
-    // Optionally show a loading spinner here
-    return null;
-  }
+  //  if (isLoading || !isAuthenticated) {
+  //   // Optionally show a loading spinner here
+  //   return null;
+  // }
 
   return <App />;
 }
