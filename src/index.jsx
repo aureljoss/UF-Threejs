@@ -17,6 +17,7 @@ import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import Fab from "@mui/material/Fab";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import Intro from "./components/Intro.jsx";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
@@ -38,6 +39,9 @@ function App() {
     const idx = findNavStep(visibleSection, option);
     if (idx !== -1) setNavStep(idx);
   };
+
+  const additionParam = 1; // Addition parameter for nav button
+  const subtractionParam = -1; // Subtraction parameter for nav button
 
   // Define navigation steps
   const [navStep, setNavStep] = useState(0);
@@ -116,23 +120,23 @@ function App() {
     // Example:
     if (section === "Program Blocking") {
       return [
-        [6, 3, 4.3],
         [-3.8, 1.8, -2],
         [-2.6, 3, 6.8],
+        [6, 3, 4.3],
       ];
     }
     if (section === "Design" && option === "1") {
       return [
-        [6, 3, 4.3],
         [-3.8, 1.8, -2],
         [-2.6, 3, 6.8],
+        [6, 3, 4.3],
       ];
     }
     if (section === "Design" && option === "2") {
       return [
-        [6, 3, 4.3],
         [-3.8, 1.8, -2],
         [-2.6, 3, 6.8],
+        [6, 3, 4.3],
       ];
     }
     // ...repeat for other sections/options
@@ -151,6 +155,8 @@ function App() {
   return (
     <>
       {/* <LoginButton /> */}
+      <Intro />
+
       <div id="canvas-container">
         <Canvas
           flat
@@ -187,6 +193,7 @@ function App() {
           visibleSection={visibleSection}
         />
       </div>
+
       {/* Footer */}
       <footer>
         <nav id="footer">
@@ -201,14 +208,16 @@ function App() {
               color="primary"
               aria-label="add"
               size="small"
+              onClick={handleScrollButtonClick}
             >
-              <ArrowDownwardIcon onClick={handleScrollButtonClick} />
+              <ArrowDownwardIcon />
             </Fab>
             <Fab
               className="scroll-button"
               color="primary"
               aria-label="add"
               size="small"
+              onClick={handleScrollButtonClick}
             >
               <ArrowUpwardIcon />
             </Fab>

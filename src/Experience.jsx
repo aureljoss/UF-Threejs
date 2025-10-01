@@ -76,7 +76,6 @@ export default function Experience(props) {
   const orbitRef = useRef();
 
   console.log(props.visibleSection, props.option);
-  
 
   useEffect(() => {
     let selected;
@@ -117,7 +116,6 @@ export default function Experience(props) {
 
       // Look at the origin
       // camera.lookAt(0,0,0);
-
     }
   });
 
@@ -152,7 +150,6 @@ export default function Experience(props) {
   // const showModal = () => {
   //   setShowDesignModal((current) => !current);
   // };
-
 
   // Stop camera animation if user interacts with OrbitControls after clicking on the Camera Markers
   useEffect(() => {
@@ -275,6 +272,7 @@ export default function Experience(props) {
                   props.setOpenModal(true);
                   props.setVisibleSection("camera");
                   props.setOption("1");
+                  props.setCameraTargetPosition([6, 3, 4.3]);
                 }}
               />
             )}
@@ -289,6 +287,7 @@ export default function Experience(props) {
                   props.setOpenModal(true);
                   props.setVisibleSection("camera");
                   props.setOption("1");
+                  props.setCameraTargetPosition([3, 3, 7]);
                 }}
               />
             )}
