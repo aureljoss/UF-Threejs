@@ -13,7 +13,7 @@ import SelectLabels from "./SelectLabels";
 import MyImageComponent from "./ImageContainer";
 import ProjectPage from "./ProjectPage";
 
-export default function SimpleContainer(props) {
+export default function UIContainer(props) {
   const [isShown, setIsShown] = useState(false);
 
   const handleClick = () => {
@@ -99,7 +99,9 @@ export default function SimpleContainer(props) {
                   {/* Design Tab */}
                   <Button
                     variant={
-                      props.visibleSection === "Design" ? "contained" : "outlined"
+                      props.visibleSection === "Design"
+                        ? "contained"
+                        : "outlined"
                     }
                     size="small"
                     onClick={() => {
@@ -128,8 +130,16 @@ export default function SimpleContainer(props) {
                     />
                     <div id="program blocking" className="overview">
                       <MyImageComponent
-                        path={props.option === "1" ? "./images/opt1-blocking.png" : "./images/Opt2-blocking.png"}
-                        description={props.option === "1" ? "A block and stack for option 1" : "A block and stack for option 2"}
+                        path={
+                          props.option === "1"
+                            ? "./images/opt1-blocking.png"
+                            : "./images/Opt2-blocking.png"
+                        }
+                        description={
+                          props.option === "1"
+                            ? "A block and stack for option 1"
+                            : "A block and stack for option 2"
+                        }
                       />
                       <Button
                         variant="outlined"
@@ -154,8 +164,16 @@ export default function SimpleContainer(props) {
                     />
                     <div id="design">
                       <MyImageComponent
-                        path={props.option === "1" ? "./images/opt1-massing.png" : "./images/opt2-massing.png"}
-                        description={props.option === "1" ? "Design for option 1" : "Design for option 2"}
+                        path={
+                          props.option === "1"
+                            ? "./images/opt1-massing.png"
+                            : "./images/opt2-massing.png"
+                        }
+                        description={
+                          props.option === "1"
+                            ? "Design for option 1"
+                            : "Design for option 2"
+                        }
                       />
                       <Button
                         variant="outlined"
@@ -180,8 +198,16 @@ export default function SimpleContainer(props) {
                     />
                     <div id="design">
                       <MyImageComponent
-                        path={props.option === "1" ? "./images/opt1-massing.png" : "./images/opt2-massing.png"}
-                        description={props.option === "1" ? "Design for option 1" : "Design for option 2"}
+                        path={
+                          props.option === "1"
+                            ? "./images/opt1-massing.png"
+                            : "./images/opt2-massing.png"
+                        }
+                        description={
+                          props.option === "1"
+                            ? "Design for option 1"
+                            : "Design for option 2"
+                        }
                       />
                       <p>
                         {" "}

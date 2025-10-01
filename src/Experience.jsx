@@ -13,6 +13,7 @@ import LocationMarker from "./components/LocationMarker";
 import CameraMarker from "./components/CameraMarker";
 import MyImageComponent from "./components/ImageContainer";
 import { useThree, useFrame } from "@react-three/fiber";
+import { select } from "three/tsl";
 
 //Important glb models
 const programModels = [
@@ -67,7 +68,6 @@ const designModels = [
 ];
 
 export default function Experience(props) {
-  const [cameraTargetPosition, setCameraTargetPosition] = useState(null);
   const [orbitEnabled, setOrbitEnabled] = useState(true);
   const [selectedModel, setSelectedModel] = useState(programModels[0]);
   const [siteModel, setSiteModel] = useState(
@@ -103,12 +103,12 @@ export default function Experience(props) {
   const { camera } = useThree();
 
   useFrame(() => {
-    if (cameraTargetPosition) {
+    if (props.cameraTargetPosition) {
       // Target position for camera (customize offset as needed)
       const target = {
-        x: cameraTargetPosition[0],
-        y: cameraTargetPosition[1],
-        z: cameraTargetPosition[2],
+        x: props.cameraTargetPosition[0],
+        y: props.cameraTargetPosition[1],
+        z: props.cameraTargetPosition[2],
       };
 
       // Smoothly interpolate camera position
@@ -118,15 +118,6 @@ export default function Experience(props) {
       // Look at the origin
       // camera.lookAt(0,0,0);
 
-      // // If camera is close enough to target, stop animating
-      // const dist = camera.position.distanceTo(target);
-      // if (dist < 0.1) {
-      //   // Snap to target and stop animating
-      //   camera.position.set(target.x, target.y, target.z);
-      //   // camera.lookAt(...cameraTargetPosition);
-      //   setCameraTargetPosition(null); //
-      //   // setOrbitEnabled(true); // Re-enable OrbitControls after animation
-      // }
     }
   });
 
@@ -169,7 +160,7 @@ export default function Experience(props) {
     if (!controls) return;
 
     const stopCameraAnimation = () => {
-      setCameraTargetPosition(null);
+      props.setCameraTargetPosition(null);
       setOrbitEnabled(true);
     };
 
@@ -258,19 +249,19 @@ export default function Experience(props) {
           <LocationMarker
             position={[5.8, 0.4, 4.3]}
             distanceFactor={4}
-            onClick={() => setCameraTargetPosition([6, 3, 4.3])}
+            onClick={() => props.setCameraTargetPosition([6, 3, 4.3])}
           />
 
           <LocationMarker
             position={[-2.6, 0.4, 6.8]}
             distanceFactor={4}
-            onClick={() => setCameraTargetPosition([-2.6, 3, 6.8])}
+            onClick={() => props.setCameraTargetPosition([-2.6, 3, 6.8])}
           />
 
           <LocationMarker
             position={[-2.6, 0.4, -0.6]}
             distanceFactor={4}
-            onClick={() => setCameraTargetPosition([-3.8, 1.8, -2])}
+            onClick={() => props.setCameraTargetPosition([-3.8, 1.8, -2])}
           />
 
           {/* Camera Marker OPTION 1*/}

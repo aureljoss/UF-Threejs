@@ -67,7 +67,7 @@ p {
 #main-nav li {
   margin: auto 10px;
   list-style: none;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   padding: 10px 20px;
@@ -101,18 +101,17 @@ a {
 }
 
 .scroll-button {
-  background-color: rgba(192, 190, 190, 0.6);
+  background: rgb(25, 118, 210);
+  color: white;
+  backdrop-filter: blur(10px);
   cursor: pointer;
   border-radius: 0.75rem;
+  border: none;
   justify-content: center;
   align-items: center;
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
-}
-
-.scroll-button--up {
-  transform: rotate(180deg);
 }
 
 #logo {
@@ -129,24 +128,33 @@ footer nav {
   align-items: center;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  border: white 1px solid;
   z-index: 3;
+  padding: 0px 20px;
 }
 
-footer ul {
+#qrcode-container {
   list-style: none;
   display: flex;
-  width: 100%;
   justify-content: space-between;
   padding-inline-start: 0px;
   margin: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 4px 20px;
 }
 
 footer li {
   margin: auto 10px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 2vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
 }
 
 #qrcode {
@@ -166,17 +174,13 @@ footer li {
   transform-origin: bottom;
 }
 
-#logout-button{
+#logout-button {
   background: rgb(25, 118, 210);
   border-radius: 10px;
   padding: 10px 20px;
   color: white;
-  position: absolute;
-  bottom: 2vh;
-  left: 20px;
   z-index: 3;
-  border: 0px;
-  
+  border: none;
 }
 
 /*MUI SECTION */
