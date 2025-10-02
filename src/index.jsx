@@ -156,6 +156,11 @@ function App() {
     <>
       {/* <LoginButton /> */}
       <Intro />
+      <div id="main-nav">
+        <div style={{width:"100px"}}></div>
+        <img src="images/ArchVue3D.png" alt="logo" id="logo" />
+        <LogoutButton />
+      </div>
 
       <div id="canvas-container">
         <Canvas
@@ -197,7 +202,6 @@ function App() {
       {/* Footer */}
       <footer>
         <nav id="footer">
-          <LogoutButton />
           <div id="qrcode-container">
             <img src="images/qrcode_archvue3d.vercel.app.png" id="qrcode" />
             <p>QR Code</p>

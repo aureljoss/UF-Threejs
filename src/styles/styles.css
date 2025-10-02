@@ -51,13 +51,13 @@ p {
 }
 
 #main-nav {
-  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100vw;
   height: 10vh;
   padding: 0px 10px;
+  z-index: 3;
 }
 
 #main-nav ul {
@@ -71,6 +71,14 @@ p {
   backdrop-filter: blur(10px);
   border-radius: 10px;
   padding: 10px 20px;
+}
+
+#background-intro {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 a {
@@ -116,7 +124,11 @@ a {
 
 #logo {
   height: 100px;
-  width: auto;
+  width: 100px;
+  display: absolute;
+  left: 50vw;
+  z-index: 10;
+  /* transform: translateX(-50%); */
 }
 
 footer nav {
@@ -128,7 +140,7 @@ footer nav {
   align-items: center;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 3;
+  z-index: -1;
   padding: 0px 20px;
 }
 
@@ -179,8 +191,11 @@ footer li {
   border-radius: 10px;
   padding: 10px 20px;
   color: white;
-  z-index: 3;
+  z-index: -1;
   border: none;
+  font-size: 1rem;
+  margin: auto 10px;
+  backdrop-filter: blur(10px);
 }
 
 /*MUI SECTION */
@@ -191,8 +206,7 @@ footer li {
 /* THREE JS SECTION */
 
 #root {
-  height: 90vh;
-  top: 10vh;
+  height: 100vh;
   width: 100vw;
   margin: 0;
   padding: 0;
@@ -228,9 +242,9 @@ footer li {
   z-index: -1;
 }
 
-.simple-container{
+.simple-container {
   position: absolute;
-  z-index: 2;
+  z-index: -1;
 }
 
 .overview {
