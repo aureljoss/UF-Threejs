@@ -14,7 +14,7 @@ import MyImageComponent from "./ImageContainer";
 import ProjectPage from "./ProjectPage";
 
 export default function UIContainer(props) {
-  const [isShown, setIsShown] = useState(false);
+  const [isShown, setIsShown] = useState(true);
 
   const handleClick = () => {
     setIsShown((current) => !current);
@@ -68,8 +68,8 @@ export default function UIContainer(props) {
                     }
                     size="small"
                     onClick={() => {
-                      // sectionClick("site");
-                      // props.showModal(false);
+                      props.tabChange("site");
+                      props.setOption("1");
                       props.setOpenModal(false);
                       props.setVisibleSection("site");
                     }}

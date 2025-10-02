@@ -71,6 +71,12 @@ function App() {
     { section: "Design", option: "2", cameraMarker: 1 },
     // 11: Camera marker 3 for design option 2
     { section: "Design", option: "2", cameraMarker: 2 },
+    // 12: Camera Marker 1 for site
+    { section: "site", option: "1", cameraMarker: 0 },
+    // 13: Camera Marker 2 for site
+    { section: "site", option: "1", cameraMarker: 1 },
+    // 14: Camera Marker 3 for site
+    { section: "site", option: "1", cameraMarker: 2 },
   ];
 
   const handleScrollButtonClick = () => {
@@ -139,6 +145,13 @@ function App() {
         [6, 3, 4.3],
       ];
     }
+    if (section === "site") {
+      return [
+        [-3.8, 1.8, -2],
+        [-2.6, 3, 6.8],
+        [6, 3, 4.3],
+      ];
+    }
     // ...repeat for other sections/options
     return [];
   }
@@ -157,11 +170,16 @@ function App() {
       {/* <LoginButton /> */}
       <Intro />
       <div id="main-nav">
-        <div style={{width:"100px"}}></div>
+        <div style={{ width: "300px" }}></div>
         <img src="images/ArchVue3D.png" alt="logo" id="logo" />
-        <LogoutButton />
+        <ul>
+          <div id="qrcode-container">
+            <img src="images/qrcode_archvue3d.vercel.app.png" id="qrcode" />
+            <p>QR Code</p>
+          </div>
+          <LogoutButton />
+        </ul>
       </div>
-
       <div id="canvas-container">
         <Canvas
           flat
@@ -201,11 +219,6 @@ function App() {
 
       {/* Footer */}
       <footer>
-        <nav id="footer">
-          <div id="qrcode-container">
-            <img src="images/qrcode_archvue3d.vercel.app.png" id="qrcode" />
-            <p>QR Code</p>
-          </div>
           <div className="scroll__wrapper">
             <Fab
               className="scroll-button"
@@ -225,8 +238,7 @@ function App() {
             >
               <ArrowUpwardIcon />
             </Fab>
-          </div>
-        </nav>
+            </div>
       </footer>
     </>
   );

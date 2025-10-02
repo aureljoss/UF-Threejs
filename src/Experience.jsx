@@ -96,6 +96,7 @@ export default function Experience(props) {
       setSiteModel("./model/site-baked-op1-blocking.jpg");
       setShowDesignCamera(false);
     }
+    orbitRef.current?.update();
   }, [props.visibleSection, props.option]);
 
   // Updates Camera position when LocationMarker is clicked
