@@ -41,7 +41,7 @@ export default function UIContainer(props) {
               flexDirection: "column",
               alignItems: "center",
               border: "white 1px solid",
-              maxHeight: "80vh",
+              maxHeight: "80vh",          
             }}
           >
             <Fab
@@ -128,7 +128,7 @@ export default function UIContainer(props) {
                         props.optionChange(selected); // <-- send to parent
                       }}
                     />
-                    <div id="program blocking" className="overview">
+                    <div id="program blocking" className="hide-on-mobile">
                       <MyImageComponent
                         path={
                           props.option === "1"
@@ -142,6 +142,7 @@ export default function UIContainer(props) {
                         }
                       />
                       <Button
+                        className="hide-on-mobile"
                         variant="outlined"
                         onClick={() => {
                           props.setOpenModal(!props.openModal);
@@ -162,7 +163,7 @@ export default function UIContainer(props) {
                         props.optionChange(selected);
                       }}
                     />
-                    <div id="design">
+                    <div id="design" className="hide-on-mobile">
                       <MyImageComponent
                         path={
                           props.option === "1"
@@ -176,6 +177,7 @@ export default function UIContainer(props) {
                         }
                       />
                       <Button
+                        className="hide-on-mobile"
                         variant="outlined"
                         onClick={() => {
                           props.setOpenModal(!props.openModal);
@@ -196,7 +198,7 @@ export default function UIContainer(props) {
                         props.optionChange(selected);
                       }}
                     />
-                    <div id="design">
+                    <div id="design" className="hide-on-mobile">
                       <MyImageComponent
                         path={
                           props.option === "1"
@@ -228,7 +230,11 @@ export default function UIContainer(props) {
                 )}
                 {props.visibleSection === "site" && (
                   <>
-                    <div id="site" style={{ marginTop: "20px" }}>
+                    <div
+                      id="site"
+                      className="hide-on-mobile"
+                      style={{ marginTop: "20px" }}
+                    >
                       <MyImageComponent
                         path="./images/site.png"
                         description="A block and stack for option 1"

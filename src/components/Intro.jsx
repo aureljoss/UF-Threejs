@@ -41,6 +41,7 @@ export default function Intro() {
             left: "50%",
             transform: "translate(-50%, -65%)",
             maxWidth: "500px",
+            minWidth: "300px",
           }}
         >
           <Fab
@@ -52,7 +53,6 @@ export default function Intro() {
           </Fab>
           <h6
             style={{
-              lineHeight: "0",
               textAlign: "center",
               fontSize: "24px",
               fontWeight: "500",
@@ -69,6 +69,7 @@ export default function Intro() {
             bridges the gap between concept and reality, making architectural
             visions engaging and interactive.
           </p>
+          <p id="under-development">This Tool is Under Development</p>
         </Box>
       </div>
     </>

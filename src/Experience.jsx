@@ -11,9 +11,7 @@ import { DoubleSide } from "three";
 import HtmlText from "./components/HtmlText";
 import LocationMarker from "./components/LocationMarker";
 import CameraMarker from "./components/CameraMarker";
-import MyImageComponent from "./components/ImageContainer";
 import { useThree, useFrame } from "@react-three/fiber";
-import { select } from "three/tsl";
 
 //Important glb models
 const programModels = [
@@ -35,15 +33,6 @@ const programModels = [
     meshKey: "bakedOpt2Blocking",
     siteTexture: "./model/site-baked-opt2-blocking.jpg",
   },
-  // {
-  //   tab: "Program Blocking",
-  //   option: "Option 3",
-  //   label: "Option 3 Blocking",
-  //   glb: "./model/opt2-blocking.glb",
-  //   texture: "./model/opt2-blocking.jpg",
-  //   meshKey: "bakedOpt2Blocking",
-  //   siteTexture: "./model/site-baked-op1-blocking.jpg",
-  // },
 ];
 
 const designModels = [

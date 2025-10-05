@@ -248,8 +248,17 @@ footer li {
   top: 14vh;
 }
 
-.overview {
-  width: "100%";
-  height: "100%";
-  overflow: "auto";
+#under-development {
+    color: #db433e;
+  font-weight: 800;
+  margin-top:1.5rem;
+  text-align: center;;
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+.hide-on-mobile{
+  display:none !important;
+}
+
 }
