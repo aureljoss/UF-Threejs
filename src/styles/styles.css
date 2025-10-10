@@ -79,7 +79,7 @@ p {
   height: 100%;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
-  z-index:2;
+  z-index: 2;
 }
 
 #intro-container {
@@ -249,16 +249,23 @@ footer li {
 }
 
 #under-development {
-    color: #db433e;
+  color: #db433e;
   font-weight: 800;
-  margin-top:1.5rem;
-  text-align: center;;
+  margin-top: 1.5rem;
+  text-align: center;
 }
 
 /* Media Queries */
 @media screen and (max-width: 480px) {
-.hide-on-mobile{
-  display:none !important;
-}
+  .hide-on-mobile {
+    display: none !important;
+  }
+  #qrcode-container {
+    display: none;
+  }
 
+  #logout-button {
+    min-width: 100px;
+    padding: 12px 10px;
+  }
 }
