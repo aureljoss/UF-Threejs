@@ -244,35 +244,43 @@ function App() {
   );
 }
 
-// Authentication Wrapper
+// // Authentication Wrapper
 
-function AuthWrapper() {
-  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+// function AuthWrapper() {
+//   const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
-  React.useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      loginWithRedirect();
-    }
-  }, [isLoading, isAuthenticated, loginWithRedirect]);
+//   React.useEffect(() => {
+//     if (!isLoading && !isAuthenticated) {
+//       loginWithRedirect();
+//     }
+//   }, [isLoading, isAuthenticated, loginWithRedirect]);
 
-  //  if (isLoading || !isAuthenticated) {
-  //   // Optionally show a loading spinner here
-  //   return null;
-  // }
+//   //  if (isLoading || !isAuthenticated) {
+//   //   // Optionally show a loading spinner here
+//   //   return null;
+//   // }
 
-  return <App />;
-}
+//   return <App />;
+// }
+
+// // Render
+
+// root.render(
+//   <Auth0Provider
+//     domain="dev-ytfzxy03jl6z81rl.us.auth0.com"
+//     clientId="Bk2ejfuM7KtdvgHbcVAwvEPQ26sn5W8X"
+//     authorizationParams={{
+//       redirect_uri: window.location.origin,
+//     }}
+//   >
+//     <AuthWrapper />
+//   </Auth0Provider>
+// );
+
+
 
 // Render
 
 root.render(
-  <Auth0Provider
-    domain="dev-ytfzxy03jl6z81rl.us.auth0.com"
-    clientId="Bk2ejfuM7KtdvgHbcVAwvEPQ26sn5W8X"
-    authorizationParams={{
-      redirect_uri: window.location.origin,
-    }}
-  >
-    <AuthWrapper />
-  </Auth0Provider>
+  <App/>
 );
