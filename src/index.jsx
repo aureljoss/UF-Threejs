@@ -177,7 +177,7 @@ function App() {
             <img src="images/qrcode_archvue3d.vercel.app.png" id="qrcode" />
             <p>QR Code</p>
           </div>
-          <LogoutButton />
+          {/* <LogoutButton /> */}
         </ul>
       </div>
       <div id="canvas-container">
